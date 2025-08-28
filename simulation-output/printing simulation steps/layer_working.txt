@@ -1,0 +1,688 @@
+~~~~~~~STARTING SIMULATION~~~~
+Properties:E0=1,N_sim=10,n_hvl=5,w_min=0.01
+   ----dimensions: ac0=0.7721;hvl0=0.8977;d=4.4885 (n_hvl*0.8977)
+
+---------simulating photon number 0
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ interaction takes place! as: s_free<lam (0.33829570940060893 vs 0.8976956662161166)
+Photon experiences COMPTON SCATTERING, preserves 95.6947733036161 % of initial energy!; E_abs = 0.0430522669638389
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.9569477330361611,pos=[3.38295709e-01 3.38295709e-14 3.38295709e-14],dir=[ 0.97701054  0.14213201 -0.15889899],w=1.0,layer=1
+next photon to simulate: E=0.9569477330361611,pos=[3.38295709e-01 3.38295709e-14 3.38295709e-14],dir=[ 0.97701054  0.14213201 -0.15889899],w=1.0,cl=1
+
+ interaction takes place! as: s_free<lam (0.5479754851157027 vs 0.5725628659989437)
+Photon experiences COMPTON SCATTERING, preserves 35.900987867698184 % of initial energy!; E_abs = 0.6133940434986361
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.34355368953752496,pos=[ 0.87367354  0.07788486 -0.08707275],dir=[ 0.03946286 -0.71908594 -0.69379975],w=1.0,layer=1
+next photon to simulate: E=0.34355368953752496,pos=[ 0.87367354  0.07788486 -0.08707275],dir=[ 0.03946286 -0.71908594 -0.69379975],w=1.0,cl=1
+
+ interaction takes place! as: s_free<lam (0.48402994459920506 vs 0.6087276192554794)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.34355368953752496)
+-->>Finish simulating 0-th photon
+
+
+
+
+---------simulating photon number 1
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ interaction takes place! as: s_free<lam (0.5525318455524287 vs 0.8976956662161166)
+Photon experiences COMPTON SCATTERING, preserves 43.68140455405655 % of initial energy!; E_abs = 0.5631859544594344
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.4368140455405655,pos=[5.52531846e-01 5.52531846e-14 5.52531846e-14],dir=[ 0.34116582 -0.67640658  0.65274806],w=1.0,layer=1
+next photon to simulate: E=0.4368140455405655,pos=[5.52531846e-01 5.52531846e-14 5.52531846e-14],dir=[ 0.34116582 -0.67640658  0.65274806],w=1.0,cl=1
+
+ NO INTERACTION as: s_free > lam (2.336403012785696 vs 1.0117186383532146)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.4368140455405655,pos=[ 1.00000000e-13 -6.84333139e-01  6.60397376e-01],dir=[ 0.34116582 -0.67640658  0.65274806],w=0.5,layer=2
+   - photon num. 1: E=0.4368140455405655,pos=[ 1.00000000e-13 -6.84333139e-01  6.60397376e-01],dir=[ 0.34116582 -0.67640658  0.65274806],w=0.5,layer=2
+next photon to simulate: E=0.4368140455405655,pos=[ 1.00000000e-13 -6.84333139e-01  6.60397376e-01],dir=[ 0.34116582 -0.67640658  0.65274806],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.18990721358668095 vs 2.6312590796257713)
+Photon experiences COMPTON SCATTERING, preserves 38.09386579633362 % of initial energy!; E_abs = 0.13520734462640344
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.4368140455405655,pos=[ 1.00000000e-13 -6.84333139e-01  6.60397376e-01],dir=[ 0.34116582 -0.67640658  0.65274806],w=0.5,layer=2
+   - photon num. 1: E=0.16639935628775862,pos=[ 0.06478985 -0.81278763  0.78435894],dir=[-0.3814868  0.8862651 -0.2626823],w=0.5,layer=2
+next photon to simulate: E=0.4368140455405655,pos=[ 1.00000000e-13 -6.84333139e-01  6.60397376e-01],dir=[ 0.34116582 -0.67640658  0.65274806],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.6071861220336444 vs 2.6312590796257713)
+Photon experiences COMPTON SCATTERING, preserves 80.69997835583995 % of initial energy!; E_abs = 0.04215260266703014
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.16639935628775862,pos=[ 0.06478985 -0.81278763  0.78435894],dir=[-0.3814868  0.8862651 -0.2626823],w=0.5,layer=2
+   - photon num. 1: E=0.35250884020650525,pos=[ 0.20715115 -1.09503782  1.05673694],dir=[ 0.06401184 -0.9972818   0.03648961],w=0.5,layer=2
+next photon to simulate: E=0.16639935628775862,pos=[ 0.06478985 -0.81278763  0.78435894],dir=[-0.3814868  0.8862651 -0.2626823],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.06999306922327704 vs 0.16983510431406337)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.08319967814387931)
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.35250884020650525,pos=[ 0.20715115 -1.09503782  1.05673694],dir=[ 0.06401184 -0.9972818   0.03648961],w=0.5,layer=2
+next photon to simulate: E=0.35250884020650525,pos=[ 0.20715115 -1.09503782  1.05673694],dir=[ 0.06401184 -0.9972818   0.03648961],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.32101611878893865 vs 5.6530457693800935)
+Photon experiences COMPTON SCATTERING, preserves 91.04636507470424 % of initial energy!; E_abs = 0.01578117731574234
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.3209464855750206,pos=[ 0.22769998 -1.41518136  1.06845069],dir=[-0.40487463 -0.87620224  0.26143102],w=0.5,layer=2
+next photon to simulate: E=0.3209464855750206,pos=[ 0.22769998 -1.41518136  1.06845069],dir=[-0.40487463 -0.87620224  0.26143102],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.4042399758020216 vs 0.5623962833671298)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.1604732427875103)
+-->>Finish simulating 1-th photon
+
+
+
+
+---------simulating photon number 2
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ NO INTERACTION as: s_free > lam (2.0884154356040274 vs 0.8976956662161166)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+   - photon num. 1: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+next photon to simulate: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.8268815503363739 vs 0.8976956662160166)
+Photon experiences COMPTON SCATTERING, preserves 80.66374914856763 % of initial energy!; E_abs = 0.09668125425716184
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+   - photon num. 1: E=0.8066374914856763,pos=[8.26881550e-01 1.72457722e-13 1.72457722e-13],dir=[0.87750601 0.33327953 0.34483032],w=0.5,layer=2
+next photon to simulate: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.58179933302049 vs 0.8976956662160166)
+Photon experiences COMPTON SCATTERING, preserves 23.327371506370156 % of initial energy!; E_abs = 0.38336314246814923
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.8066374914856763,pos=[8.26881550e-01 1.72457722e-13 1.72457722e-13],dir=[0.87750601 0.33327953 0.34483032],w=0.5,layer=2
+   - photon num. 1: E=0.23327371506370156,pos=[5.81799333e-01 1.47949500e-13 1.47949500e-13],dir=[-0.6795597   0.48111537 -0.55382905],w=0.5,layer=2
+next photon to simulate: E=0.8066374914856763,pos=[8.26881550e-01 1.72457722e-13 1.72457722e-13],dir=[0.87750601 0.33327953 0.34483032],w=0.5,cl=2
+
+ NO INTERACTION as: s_free > lam (2.0126698308033033 vs 0.08069929410856894)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.23327371506370156,pos=[5.81799333e-01 1.47949500e-13 1.47949500e-13],dir=[-0.6795597   0.48111537 -0.55382905],w=0.5,layer=2
+   - photon num. 1: E=0.8066374914856763,pos=[1.00000000e-13 2.68954226e-02 2.78275637e-02],dir=[0.87750601 0.33327953 0.34483032],w=0.25,layer=3
+   - photon num. 2: E=0.8066374914856763,pos=[1.00000000e-13 2.68954226e-02 2.78275637e-02],dir=[0.87750601 0.33327953 0.34483032],w=0.25,layer=3
+next photon to simulate: E=0.23327371506370156,pos=[5.81799333e-01 1.47949500e-13 1.47949500e-13],dir=[-0.6795597   0.48111537 -0.55382905],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.030457798294022276 vs 0.8561416022857662)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.11663685753185078)
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.8066374914856763,pos=[1.00000000e-13 2.68954226e-02 2.78275637e-02],dir=[0.87750601 0.33327953 0.34483032],w=0.25,layer=3
+   - photon num. 1: E=0.8066374914856763,pos=[1.00000000e-13 2.68954226e-02 2.78275637e-02],dir=[0.87750601 0.33327953 0.34483032],w=0.25,layer=3
+next photon to simulate: E=0.8066374914856763,pos=[1.00000000e-13 2.68954226e-02 2.78275637e-02],dir=[0.87750601 0.33327953 0.34483032],w=0.25,cl=3
+
+ NO INTERACTION as: s_free > lam (4.315044927797465 vs 1.0230079933650593)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.8066374914856763,pos=[1.00000000e-13 2.68954226e-02 2.78275637e-02],dir=[0.87750601 0.33327953 0.34483032],w=0.25,layer=3
+   - photon num. 1: E=0.8066374914856763,pos=[1.00000000e-13 3.67843044e-01 3.80591741e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.125,layer=4
+   - photon num. 2: E=0.8066374914856763,pos=[1.00000000e-13 3.67843044e-01 3.80591741e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.125,layer=4
+next photon to simulate: E=0.8066374914856763,pos=[1.00000000e-13 2.68954226e-02 2.78275637e-02],dir=[0.87750601 0.33327953 0.34483032],w=0.25,cl=3
+
+ interaction takes place! as: s_free<lam (0.707447705750881 vs 1.0230079933650593)
+Photon experiences COMPTON SCATTERING, preserves 57.27518156498677 % of initial energy!; E_abs = 0.08615860091650014
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.8066374914856763,pos=[1.00000000e-13 3.67843044e-01 3.80591741e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.125,layer=4
+   - photon num. 1: E=0.8066374914856763,pos=[1.00000000e-13 3.67843044e-01 3.80591741e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.125,layer=4
+   - photon num. 2: E=0.46200308781967575,pos=[0.62078962 0.26267326 0.27177699],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.25,layer=3
+next photon to simulate: E=0.8066374914856763,pos=[1.00000000e-13 3.67843044e-01 3.80591741e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.19647818108922735 vs 1.0230079933650593)
+Photon experiences COMPTON SCATTERING, preserves 57.548249886050606 % of initial energy!; E_abs = 0.042803966526366144
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.8066374914856763,pos=[1.00000000e-13 3.67843044e-01 3.80591741e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.125,layer=4
+   - photon num. 1: E=0.46200308781967575,pos=[0.62078962 0.26267326 0.27177699],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.25,layer=3
+   - photon num. 2: E=0.46420575927474717,pos=[0.17241079 0.4333252  0.44834338],dir=[ 0.31652064  0.93434857 -0.16372976],w=0.125,layer=4
+next photon to simulate: E=0.8066374914856763,pos=[1.00000000e-13 3.67843044e-01 3.80591741e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.125,cl=4
+
+ NO INTERACTION as: s_free > lam (1.0881884657504484 vs 1.0230079933650593)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=0.46200308781967575,pos=[0.62078962 0.26267326 0.27177699],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.25,layer=3
+   - photon num. 1: E=0.46420575927474717,pos=[0.17241079 0.4333252  0.44834338],dir=[ 0.31652064  0.93434857 -0.16372976],w=0.125,layer=4
+   - photon num. 2: E=0.8066374914856763,pos=[1.00000000e-13 7.08790665e-01 7.33355919e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.0625,layer=5
+   - photon num. 3: E=0.8066374914856763,pos=[1.00000000e-13 7.08790665e-01 7.33355919e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.0625,layer=5
+next photon to simulate: E=0.46200308781967575,pos=[0.62078962 0.26267326 0.27177699],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.25,cl=3
+
+ NO INTERACTION as: s_free > lam (0.5337681761359023 vs 0.31896215308014697)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 5)--:
+   - photon num. 0: E=0.46420575927474717,pos=[0.17241079 0.4333252  0.44834338],dir=[ 0.31652064  0.93434857 -0.16372976],w=0.125,layer=4
+   - photon num. 1: E=0.8066374914856763,pos=[1.00000000e-13 7.08790665e-01 7.33355919e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.0625,layer=5
+   - photon num. 2: E=0.8066374914856763,pos=[1.00000000e-13 7.08790665e-01 7.33355919e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.0625,layer=5
+   - photon num. 3: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,layer=4
+   - photon num. 4: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,layer=4
+next photon to simulate: E=0.46420575927474717,pos=[0.17241079 0.4333252  0.44834338],dir=[ 0.31652064  0.93434857 -0.16372976],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.36522660511328736 vs 2.2914299472693305)
+Photon experiences COMPTON SCATTERING, preserves 56.61737381951186 % of initial energy!; E_abs = 0.025173081156807525
+ ---photons to simulate (how many in queue: 5)--:
+   - photon num. 0: E=0.8066374914856763,pos=[1.00000000e-13 7.08790665e-01 7.33355919e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.0625,layer=5
+   - photon num. 1: E=0.8066374914856763,pos=[1.00000000e-13 7.08790665e-01 7.33355919e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.0625,layer=5
+   - photon num. 2: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,layer=4
+   - photon num. 3: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,layer=4
+   - photon num. 4: E=0.26282111002028696,pos=[0.28801255 0.77457415 0.38854491],dir=[-0.86308238  0.40763907 -0.29819321],w=0.125,layer=4
+next photon to simulate: E=0.8066374914856763,pos=[1.00000000e-13 7.08790665e-01 7.33355919e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.0625,cl=5
+
+ NO INTERACTION as: s_free > lam (12.426496504241433 vs 1.0230079933650593)
+escape on right
+  escape on right; E_out=0.05041484321785477
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=0.8066374914856763,pos=[1.00000000e-13 7.08790665e-01 7.33355919e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.0625,layer=5
+   - photon num. 1: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,layer=4
+   - photon num. 2: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,layer=4
+   - photon num. 3: E=0.26282111002028696,pos=[0.28801255 0.77457415 0.38854491],dir=[-0.86308238  0.40763907 -0.29819321],w=0.125,layer=4
+next photon to simulate: E=0.8066374914856763,pos=[1.00000000e-13 7.08790665e-01 7.33355919e-01],dir=[0.87750601 0.33327953 0.34483032],w=0.0625,cl=5
+
+ interaction takes place! as: s_free<lam (0.6566691234164023 vs 1.0230079933650593)
+Photon experiences COMPTON SCATTERING, preserves 65.93504754210981 % of initial energy!; E_abs = 0.017173792373882103
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,layer=4
+   - photon num. 1: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,layer=4
+   - photon num. 2: E=0.26282111002028696,pos=[0.28801255 0.77457415 0.38854491],dir=[-0.86308238  0.40763907 -0.29819321],w=0.125,layer=4
+   - photon num. 3: E=0.5318568135035627,pos=[0.5762311  0.92764504 0.95979535],dir=[0.31811859 0.22900313 0.91997725],w=0.0625,layer=5
+next photon to simulate: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.03734521128319026 vs 1.0340364266015427)
+Photon experiences COMPTON SCATTERING, preserves 87.67444610299064 % of initial energy!; E_abs = 0.0071180549493827005
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,layer=4
+   - photon num. 1: E=0.26282111002028696,pos=[0.28801255 0.77457415 0.38854491],dir=[-0.86308238  0.40763907 -0.29819321],w=0.125,layer=4
+   - photon num. 2: E=0.5318568135035627,pos=[0.5762311  0.92764504 0.95979535],dir=[0.31811859 0.22900313 0.91997725],w=0.0625,layer=5
+   - photon num. 3: E=0.4050586482246141,pos=[0.03242113 0.16383973 0.12513605],dir=[ 0.49155117 -0.28534964 -0.82277156],w=0.125,layer=4
+next photon to simulate: E=0.46200308781967575,pos=[1.00000000e-13 1.74198651e-01 1.40505747e-01],dir=[ 0.86814704 -0.27738278 -0.41155741],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.46726781096396763 vs 1.0340364266015427)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.05775038597745947)
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.26282111002028696,pos=[0.28801255 0.77457415 0.38854491],dir=[-0.86308238  0.40763907 -0.29819321],w=0.125,layer=4
+   - photon num. 1: E=0.5318568135035627,pos=[0.5762311  0.92764504 0.95979535],dir=[0.31811859 0.22900313 0.91997725],w=0.0625,layer=5
+   - photon num. 2: E=0.4050586482246141,pos=[0.03242113 0.16383973 0.12513605],dir=[ 0.49155117 -0.28534964 -0.82277156],w=0.125,layer=4
+next photon to simulate: E=0.26282111002028696,pos=[0.28801255 0.77457415 0.38854491],dir=[-0.86308238  0.40763907 -0.29819321],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.3126788746669324 vs 0.33370226401386716)
+Photon experiences COMPTON SCATTERING, preserves 58.95268844459191 % of initial energy!; E_abs = 0.013485124982926134
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.5318568135035627,pos=[0.5762311  0.92764504 0.95979535],dir=[0.31811859 0.22900313 0.91997725],w=0.0625,layer=5
+   - photon num. 1: E=0.4050586482246141,pos=[0.03242113 0.16383973 0.12513605],dir=[ 0.49155117 -0.28534964 -0.82277156],w=0.125,layer=4
+   - photon num. 2: E=0.1549401101568779,pos=[0.01814492 0.90203428 0.29530619],dir=[-0.13937094 -0.57119648  0.80889451],w=0.125,layer=4
+next photon to simulate: E=0.5318568135035627,pos=[0.5762311  0.92764504 0.95979535],dir=[0.31811859 0.22900313 0.91997725],w=0.0625,cl=5
+
+ interaction takes place! as: s_free<lam (0.08062194514897861 vs 1.0105180146964001)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.03324105084397267)
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.4050586482246141,pos=[0.03242113 0.16383973 0.12513605],dir=[ 0.49155117 -0.28534964 -0.82277156],w=0.125,layer=4
+   - photon num. 1: E=0.1549401101568779,pos=[0.01814492 0.90203428 0.29530619],dir=[-0.13937094 -0.57119648  0.80889451],w=0.125,layer=4
+next photon to simulate: E=0.4050586482246141,pos=[0.03242113 0.16383973 0.12513605],dir=[ 0.49155117 -0.28534964 -0.82277156],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (1.0240547875630748 vs 1.7602939086990987)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.050632331028076766)
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.1549401101568779,pos=[0.01814492 0.90203428 0.29530619],dir=[-0.13937094 -0.57119648  0.80889451],w=0.125,layer=4
+next photon to simulate: E=0.1549401101568779,pos=[0.01814492 0.90203428 0.29530619],dir=[-0.13937094 -0.57119648  0.80889451],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.014181226598066888 vs 0.1301915397765745)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.019367513769609736)
+-->>Finish simulating 2-th photon
+
+
+
+
+---------simulating photon number 3
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ interaction takes place! as: s_free<lam (0.29295512867581536 vs 0.8976956662161166)
+Photon experiences COMPTON SCATTERING, preserves 25.638045892494382 % of initial energy!; E_abs = 0.7436195410750561
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.2563804589249438,pos=[2.92955129e-01 2.92955129e-14 2.92955129e-14],dir=[-0.48213162 -0.31501039 -0.81750691],w=1.0,layer=1
+next photon to simulate: E=0.2563804589249438,pos=[2.92955129e-01 2.92955129e-14 2.92955129e-14],dir=[-0.48213162 -0.31501039 -0.81750691],w=1.0,cl=1
+
+ interaction takes place! as: s_free<lam (0.17686582898877096 vs 0.6076247961770395)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.2563804589249438)
+-->>Finish simulating 3-th photon
+
+
+
+
+---------simulating photon number 4
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ interaction takes place! as: s_free<lam (0.12291108460606438 vs 0.8976956662161166)
+Photon is absorbed via PHOTOEFFECT! (E_abs =1.0)
+-->>Finish simulating 4-th photon
+
+
+
+
+---------simulating photon number 5
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ NO INTERACTION as: s_free > lam (2.183695397465345 vs 0.8976956662161166)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+   - photon num. 1: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+next photon to simulate: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,cl=2
+
+ NO INTERACTION as: s_free > lam (1.4307083596523391 vs 0.8976956662160166)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+   - photon num. 1: E=1,pos=[1.00000000e-13 1.79539133e-13 1.79539133e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.25,layer=3
+   - photon num. 2: E=1,pos=[1.00000000e-13 1.79539133e-13 1.79539133e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.25,layer=3
+next photon to simulate: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.29632146470072146 vs 0.8976956662160166)
+Photon experiences COMPTON SCATTERING, preserves 21.907544712430735 % of initial energy!; E_abs = 0.3904622764378463
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 1.79539133e-13 1.79539133e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.25,layer=3
+   - photon num. 1: E=1,pos=[1.00000000e-13 1.79539133e-13 1.79539133e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.25,layer=3
+   - photon num. 2: E=0.21907544712430735,pos=[2.96321465e-01 1.19401713e-13 1.19401713e-13],dir=[-0.82152976 -0.56574164  0.07088899],w=0.5,layer=2
+next photon to simulate: E=1,pos=[1.00000000e-13 1.79539133e-13 1.79539133e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.25,cl=3
+
+ interaction takes place! as: s_free<lam (0.7564234336698262 vs 0.8976956662160166)
+Photon experiences COMPTON SCATTERING, preserves 84.94683504804159 % of initial energy!; E_abs = 0.03763291237989602
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 1.79539133e-13 1.79539133e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.25,layer=3
+   - photon num. 1: E=0.21907544712430735,pos=[2.96321465e-01 1.19401713e-13 1.19401713e-13],dir=[-0.82152976 -0.56574164  0.07088899],w=0.5,layer=2
+   - photon num. 2: E=0.8494683504804159,pos=[7.56423434e-01 2.55181477e-13 2.55181477e-13],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.25,layer=3
+next photon to simulate: E=1,pos=[1.00000000e-13 1.79539133e-13 1.79539133e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.25,cl=3
+
+ NO INTERACTION as: s_free > lam (1.0306479129796986 vs 0.8976956662160166)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=0.21907544712430735,pos=[2.96321465e-01 1.19401713e-13 1.19401713e-13],dir=[-0.82152976 -0.56574164  0.07088899],w=0.5,layer=2
+   - photon num. 1: E=0.8494683504804159,pos=[7.56423434e-01 2.55181477e-13 2.55181477e-13],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.25,layer=3
+   - photon num. 2: E=1,pos=[1.000000e-13 2.693087e-13 2.693087e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.125,layer=4
+   - photon num. 3: E=1,pos=[1.000000e-13 2.693087e-13 2.693087e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.125,layer=4
+next photon to simulate: E=0.21907544712430735,pos=[2.96321465e-01 1.19401713e-13 1.19401713e-13],dir=[-0.82152976 -0.56574164  0.07088899],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.019663752162782887 vs 0.36069474205048707)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.10953772356215367)
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.8494683504804159,pos=[7.56423434e-01 2.55181477e-13 2.55181477e-13],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.25,layer=3
+   - photon num. 1: E=1,pos=[1.000000e-13 2.693087e-13 2.693087e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.125,layer=4
+   - photon num. 2: E=1,pos=[1.000000e-13 2.693087e-13 2.693087e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.125,layer=4
+next photon to simulate: E=0.8494683504804159,pos=[7.56423434e-01 2.55181477e-13 2.55181477e-13],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.25,cl=3
+
+ NO INTERACTION as: s_free > lam (2.1658707274006876 vs 0.15533856248822783)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=1,pos=[1.000000e-13 2.693087e-13 2.693087e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.125,layer=4
+   - photon num. 1: E=1,pos=[1.000000e-13 2.693087e-13 2.693087e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.125,layer=4
+   - photon num. 2: E=0.8494683504804159,pos=[ 1.00000000e-13  6.44892499e-02 -3.65540062e-03],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.125,layer=4
+   - photon num. 3: E=0.8494683504804159,pos=[ 1.00000000e-13  6.44892499e-02 -3.65540062e-03],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.125,layer=4
+next photon to simulate: E=1,pos=[1.000000e-13 2.693087e-13 2.693087e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.125,cl=4
+
+ NO INTERACTION as: s_free > lam (1.3678474021968345 vs 0.8976956662160166)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 5)--:
+   - photon num. 0: E=1,pos=[1.000000e-13 2.693087e-13 2.693087e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.125,layer=4
+   - photon num. 1: E=0.8494683504804159,pos=[ 1.00000000e-13  6.44892499e-02 -3.65540062e-03],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.125,layer=4
+   - photon num. 2: E=0.8494683504804159,pos=[ 1.00000000e-13  6.44892499e-02 -3.65540062e-03],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.125,layer=4
+   - photon num. 3: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 4: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+next photon to simulate: E=1,pos=[1.000000e-13 2.693087e-13 2.693087e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.125,cl=4
+
+ NO INTERACTION as: s_free > lam (2.511195149459757 vs 0.8976956662160166)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 6)--:
+   - photon num. 0: E=0.8494683504804159,pos=[ 1.00000000e-13  6.44892499e-02 -3.65540062e-03],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.125,layer=4
+   - photon num. 1: E=0.8494683504804159,pos=[ 1.00000000e-13  6.44892499e-02 -3.65540062e-03],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.125,layer=4
+   - photon num. 2: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 3: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 4: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 5: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+next photon to simulate: E=0.8494683504804159,pos=[ 1.00000000e-13  6.44892499e-02 -3.65540062e-03],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.1084250856629942 vs 0.9870782943584792)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.10618354381005199)
+ ---photons to simulate (how many in queue: 5)--:
+   - photon num. 0: E=0.8494683504804159,pos=[ 1.00000000e-13  6.44892499e-02 -3.65540062e-03],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.125,layer=4
+   - photon num. 1: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 2: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 3: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 4: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+next photon to simulate: E=0.8494683504804159,pos=[ 1.00000000e-13  6.44892499e-02 -3.65540062e-03],dir=[ 0.90944728  0.41515287 -0.02353183],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.13625300646238647 vs 0.9870782943584792)
+Photon experiences COMPTON SCATTERING, preserves 93.1476255872517 % of initial energy!; E_abs = 0.007276093986589392
+ ---photons to simulate (how many in queue: 5)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 1: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 2: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 3: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 4: E=0.7912595985877008,pos=[ 0.12391493  0.12105508 -0.00686168],dir=[ 0.74767024  0.66405798 -0.00402556],w=0.125,layer=4
+next photon to simulate: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,cl=5
+
+ interaction takes place! as: s_free<lam (0.4094099081586242 vs 0.8976956662160166)
+Photon experiences COMPTON SCATTERING, preserves 65.11210818732086 % of initial energy!; E_abs = 0.021804932382924462
+ ---photons to simulate (how many in queue: 5)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 1: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 2: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 3: E=0.7912595985877008,pos=[ 0.12391493  0.12105508 -0.00686168],dir=[ 0.74767024  0.66405798 -0.00402556],w=0.125,layer=4
+   - photon num. 4: E=0.6511210818732086,pos=[4.09409908e-01 4.00019257e-13 4.00019257e-13],dir=[ 0.72619973 -0.67645786 -0.12263241],w=0.0625,layer=5
+next photon to simulate: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,cl=5
+
+ NO INTERACTION as: s_free > lam (2.865355748146866 vs 0.8976956662160166)
+escape on right
+  escape on right; E_out=0.0625
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 1: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 2: E=0.7912595985877008,pos=[ 0.12391493  0.12105508 -0.00686168],dir=[ 0.74767024  0.66405798 -0.00402556],w=0.125,layer=4
+   - photon num. 3: E=0.6511210818732086,pos=[4.09409908e-01 4.00019257e-13 4.00019257e-13],dir=[ 0.72619973 -0.67645786 -0.12263241],w=0.0625,layer=5
+next photon to simulate: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,cl=5
+
+ NO INTERACTION as: s_free > lam (1.891300729371497 vs 0.8976956662160166)
+escape on right
+  escape on right; E_out=0.0625
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,layer=5
+   - photon num. 1: E=0.7912595985877008,pos=[ 0.12391493  0.12105508 -0.00686168],dir=[ 0.74767024  0.66405798 -0.00402556],w=0.125,layer=4
+   - photon num. 2: E=0.6511210818732086,pos=[4.09409908e-01 4.00019257e-13 4.00019257e-13],dir=[ 0.72619973 -0.67645786 -0.12263241],w=0.0625,layer=5
+next photon to simulate: E=1,pos=[1.00000000e-13 3.59078266e-13 3.59078266e-13],dir=[1.e+00 1.e-13 1.e-13],w=0.0625,cl=5
+
+ NO INTERACTION as: s_free > lam (8.290234002692902 vs 0.8976956662160166)
+escape on right
+  escape on right; E_out=0.0625
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.7912595985877008,pos=[ 0.12391493  0.12105508 -0.00686168],dir=[ 0.74767024  0.66405798 -0.00402556],w=0.125,layer=4
+   - photon num. 1: E=0.6511210818732086,pos=[4.09409908e-01 4.00019257e-13 4.00019257e-13],dir=[ 0.72619973 -0.67645786 -0.12263241],w=0.0625,layer=5
+next photon to simulate: E=0.7912595985877008,pos=[ 0.12391493  0.12105508 -0.00686168],dir=[ 0.74767024  0.66405798 -0.00402556],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.21049457539316843 vs 1.0349224755993034)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.0989074498234626)
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.6511210818732086,pos=[4.09409908e-01 4.00019257e-13 4.00019257e-13],dir=[ 0.72619973 -0.67645786 -0.12263241],w=0.0625,layer=5
+next photon to simulate: E=0.6511210818732086,pos=[4.09409908e-01 4.00019257e-13 4.00019257e-13],dir=[ 0.72619973 -0.67645786 -0.12263241],w=0.0625,cl=5
+
+ NO INTERACTION as: s_free > lam (1.0299998635193455 vs 0.672384933512198)
+escape on right
+  escape on right; E_out=0.04069506761707554
+-->>Finish simulating 5-th photon
+
+
+
+
+---------simulating photon number 6
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ interaction takes place! as: s_free<lam (0.05732248628807558 vs 0.8976956662161166)
+Photon experiences COMPTON SCATTERING, preserves 21.440506329688166 % of initial energy!; E_abs = 0.7855949367031183
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.21440506329688166,pos=[5.73224863e-02 5.73224863e-15 5.73224863e-15],dir=[-0.87233924 -0.4221833  -0.24654719],w=1.0,layer=1
+next photon to simulate: E=0.21440506329688166,pos=[5.73224863e-02 5.73224863e-15 5.73224863e-15],dir=[-0.87233924 -0.4221833  -0.24654719],w=1.0,cl=1
+
+ NO INTERACTION as: s_free > lam (0.3739688759432907 vs 0.06571123233556808)
+backscatter
+  photon bacscatters with E_bs=0.21440506329688166
+-->>Finish simulating 6-th photon
+
+
+
+
+---------simulating photon number 7
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ NO INTERACTION as: s_free > lam (0.9287391043345866 vs 0.8976956662161166)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+   - photon num. 1: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+next photon to simulate: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.5435336985721002 vs 0.8976956662160166)
+Photon experiences COMPTON SCATTERING, preserves 76.81287937961567 % of initial energy!; E_abs = 0.11593560310192169
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+   - photon num. 1: E=0.7681287937961566,pos=[5.43533699e-01 1.44122936e-13 1.44122936e-13],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.5,layer=2
+next photon to simulate: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.8396793596928723 vs 0.8976956662160166)
+Photon experiences COMPTON SCATTERING, preserves 70.7806018133933 % of initial energy!; E_abs = 0.14609699093303347
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.7681287937961566,pos=[5.43533699e-01 1.44122936e-13 1.44122936e-13],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.5,layer=2
+   - photon num. 1: E=0.7078060181339331,pos=[8.39679360e-01 1.73737503e-13 1.73737503e-13],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.5,layer=2
+next photon to simulate: E=0.7681287937961566,pos=[5.43533699e-01 1.44122936e-13 1.44122936e-13],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.5,cl=2
+
+ NO INTERACTION as: s_free > lam (0.6465477057902006 vs 0.4187564083776417)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.7078060181339331,pos=[8.39679360e-01 1.73737503e-13 1.73737503e-13],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.5,layer=2
+   - photon num. 1: E=0.7681287937961566,pos=[ 1.00000000e-13  3.61630049e-03 -2.23412517e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.25,layer=3
+   - photon num. 2: E=0.7681287937961566,pos=[ 1.00000000e-13  3.61630049e-03 -2.23412517e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.25,layer=3
+next photon to simulate: E=0.7078060181339331,pos=[8.39679360e-01 1.73737503e-13 1.73737503e-13],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.5,cl=2
+
+ NO INTERACTION as: s_free > lam (1.1540459858982088 vs 0.07352670792917418)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=0.7681287937961566,pos=[ 1.00000000e-13  3.61630049e-03 -2.23412517e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.25,layer=3
+   - photon num. 1: E=0.7681287937961566,pos=[ 1.00000000e-13  3.61630049e-03 -2.23412517e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.25,layer=3
+   - photon num. 2: E=0.7078060181339331,pos=[ 1.00000000e-13  1.77855630e-02 -4.15205817e-02],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.25,layer=3
+   - photon num. 3: E=0.7078060181339331,pos=[ 1.00000000e-13  1.77855630e-02 -4.15205817e-02],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.25,layer=3
+next photon to simulate: E=0.7681287937961566,pos=[ 1.00000000e-13  3.61630049e-03 -2.23412517e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.25,cl=3
+
+ NO INTERACTION as: s_free > lam (1.3372968792222593 vs 1.0614234371397802)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 5)--:
+   - photon num. 0: E=0.7681287937961566,pos=[ 1.00000000e-13  3.61630049e-03 -2.23412517e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.25,layer=3
+   - photon num. 1: E=0.7078060181339331,pos=[ 1.00000000e-13  1.77855630e-02 -4.15205817e-02],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.25,layer=3
+   - photon num. 2: E=0.7078060181339331,pos=[ 1.00000000e-13  1.77855630e-02 -4.15205817e-02],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.25,layer=3
+   - photon num. 3: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 4: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+next photon to simulate: E=0.7681287937961566,pos=[ 1.00000000e-13  3.61630049e-03 -2.23412517e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.25,cl=3
+
+ NO INTERACTION as: s_free > lam (2.7060197445051877 vs 1.0614234371397802)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 6)--:
+   - photon num. 0: E=0.7078060181339331,pos=[ 1.00000000e-13  1.77855630e-02 -4.15205817e-02],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.25,layer=3
+   - photon num. 1: E=0.7078060181339331,pos=[ 1.00000000e-13  1.77855630e-02 -4.15205817e-02],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.25,layer=3
+   - photon num. 2: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 3: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 4: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 5: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+next photon to simulate: E=0.7078060181339331,pos=[ 1.00000000e-13  1.77855630e-02 -4.15205817e-02],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.25,cl=3
+
+ interaction takes place! as: s_free<lam (0.6702031718575401 vs 1.137690608291644)
+Photon experiences COMPTON SCATTERING, preserves 58.846839508456114 % of initial energy!; E_abs = 0.07282113665286592
+ ---photons to simulate (how many in queue: 6)--:
+   - photon num. 0: E=0.7078060181339331,pos=[ 1.00000000e-13  1.77855630e-02 -4.15205817e-02],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.25,layer=3
+   - photon num. 1: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 2: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 3: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 4: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 5: E=0.4165214715224694,pos=[ 0.52882434  0.17990272 -0.41998477],dir=[0.51908535 0.83000501 0.20406391],w=0.25,layer=3
+next photon to simulate: E=0.7078060181339331,pos=[ 1.00000000e-13  1.77855630e-02 -4.15205817e-02],dir=[ 0.78905078  0.24189255 -0.56470068],w=0.25,cl=3
+
+ interaction takes place! as: s_free<lam (0.006762014590177803 vs 1.137690608291644)
+Photon experiences COMPTON SCATTERING, preserves 62.22132396636183 % of initial energy!; E_abs = 0.06684993563435321
+ ---photons to simulate (how many in queue: 6)--:
+   - photon num. 0: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 1: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 2: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 3: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 4: E=0.4165214715224694,pos=[ 0.52882434  0.17990272 -0.41998477],dir=[0.51908535 0.83000501 0.20406391],w=0.25,layer=3
+   - photon num. 5: E=0.44040627559652024,pos=[ 0.00533557  0.01942124 -0.0453391 ],dir=[0.83824699 0.41455437 0.35424097],w=0.25,layer=3
+next photon to simulate: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.9085649516839908 vs 1.0614234371397802)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.09601609922451958)
+ ---photons to simulate (how many in queue: 5)--:
+   - photon num. 0: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 1: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 2: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 3: E=0.4165214715224694,pos=[ 0.52882434  0.17990272 -0.41998477],dir=[0.51908535 0.83000501 0.20406391],w=0.25,layer=3
+   - photon num. 4: E=0.44040627559652024,pos=[ 0.00533557  0.01942124 -0.0453391 ],dir=[0.83824699 0.41455437 0.35424097],w=0.25,layer=3
+next photon to simulate: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.8987441398833941 vs 1.0614234371397802)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.09601609922451958)
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 1: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 2: E=0.4165214715224694,pos=[ 0.52882434  0.17990272 -0.41998477],dir=[0.51908535 0.83000501 0.20406391],w=0.25,layer=3
+   - photon num. 3: E=0.44040627559652024,pos=[ 0.00533557  0.01942124 -0.0453391 ],dir=[0.83824699 0.41455437 0.35424097],w=0.25,layer=3
+next photon to simulate: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,cl=4
+
+ interaction takes place! as: s_free<lam (0.2198635788746168 vs 1.0614234371397802)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.09601609922451958)
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,layer=4
+   - photon num. 1: E=0.4165214715224694,pos=[ 0.52882434  0.17990272 -0.41998477],dir=[0.51908535 0.83000501 0.20406391],w=0.25,layer=3
+   - photon num. 2: E=0.44040627559652024,pos=[ 0.00533557  0.01942124 -0.0453391 ],dir=[0.83824699 0.41455437 0.35424097],w=0.25,layer=3
+next photon to simulate: E=0.7681287937961566,pos=[ 1.00000000e-13  1.27825509e-02 -7.89697060e-01],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.125,cl=4
+
+ NO INTERACTION as: s_free > lam (1.1290933429912497 vs 1.0614234371397802)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 4)--:
+   - photon num. 0: E=0.4165214715224694,pos=[ 0.52882434  0.17990272 -0.41998477],dir=[0.51908535 0.83000501 0.20406391],w=0.25,layer=3
+   - photon num. 1: E=0.44040627559652024,pos=[ 0.00533557  0.01942124 -0.0453391 ],dir=[0.83824699 0.41455437 0.35424097],w=0.25,layer=3
+   - photon num. 2: E=0.7681287937961566,pos=[ 1.00000000e-13  2.19488013e-02 -1.35598160e+00],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.0625,layer=5
+   - photon num. 3: E=0.7681287937961566,pos=[ 1.00000000e-13  2.19488013e-02 -1.35598160e+00],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.0625,layer=5
+next photon to simulate: E=0.4165214715224694,pos=[ 0.52882434  0.17990272 -0.41998477],dir=[0.51908535 0.83000501 0.20406391],w=0.25,cl=3
+
+ interaction takes place! as: s_free<lam (0.2798801151512141 vs 0.7106178685313492)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.10413036788061734)
+ ---photons to simulate (how many in queue: 3)--:
+   - photon num. 0: E=0.44040627559652024,pos=[ 0.00533557  0.01942124 -0.0453391 ],dir=[0.83824699 0.41455437 0.35424097],w=0.25,layer=3
+   - photon num. 1: E=0.7681287937961566,pos=[ 1.00000000e-13  2.19488013e-02 -1.35598160e+00],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.0625,layer=5
+   - photon num. 2: E=0.7681287937961566,pos=[ 1.00000000e-13  2.19488013e-02 -1.35598160e+00],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.0625,layer=5
+next photon to simulate: E=0.44040627559652024,pos=[ 0.00533557  0.01942124 -0.0453391 ],dir=[0.83824699 0.41455437 0.35424097],w=0.25,cl=3
+
+ interaction takes place! as: s_free<lam (0.2403449304606714 vs 1.0645550876459766)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.11010156889913006)
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.7681287937961566,pos=[ 1.00000000e-13  2.19488013e-02 -1.35598160e+00],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.0625,layer=5
+   - photon num. 1: E=0.7681287937961566,pos=[ 1.00000000e-13  2.19488013e-02 -1.35598160e+00],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.0625,layer=5
+next photon to simulate: E=0.7681287937961566,pos=[ 1.00000000e-13  2.19488013e-02 -1.35598160e+00],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.0625,cl=5
+
+ interaction takes place! as: s_free<lam (0.33319276991512553 vs 1.0614234371397802)
+Photon experiences COMPTON SCATTERING, preserves 53.54460076669694 % of initial energy!; E_abs = 0.022302331111497486
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.7681287937961566,pos=[ 1.00000000e-13  2.19488013e-02 -1.35598160e+00],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.0625,layer=5
+   - photon num. 1: E=0.41129149601219683,pos=[ 0.28179678  0.02482619 -1.5337447 ],dir=[ 0.01076912  0.64389963 -0.76503418],w=0.0625,layer=5
+next photon to simulate: E=0.7681287937961566,pos=[ 1.00000000e-13  2.19488013e-02 -1.35598160e+00],dir=[ 0.84574698  0.00863581 -0.53351426],w=0.0625,cl=5
+
+ interaction takes place! as: s_free<lam (0.08315461401745294 vs 1.0614234371397802)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.04800804961225979)
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.41129149601219683,pos=[ 0.28179678  0.02482619 -1.5337447 ],dir=[ 0.01076912  0.64389963 -0.76503418],w=0.0625,layer=5
+next photon to simulate: E=0.41129149601219683,pos=[ 0.28179678  0.02482619 -1.5337447 ],dir=[ 0.01076912  0.64389963 -0.76503418],w=0.0625,cl=5
+
+ interaction takes place! as: s_free<lam (0.6200733633712577 vs 6.79573927689038)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.025705718500762302)
+-->>Finish simulating 7-th photon
+
+
+
+
+---------simulating photon number 8
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ NO INTERACTION as: s_free > lam (0.979408952560592 vs 0.8976956662161166)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+   - photon num. 1: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+next photon to simulate: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.08329236391694453 vs 0.8976956662160166)
+Photon experiences COMPTON SCATTERING, preserves 48.03753983908992 % of initial energy!; E_abs = 0.25981230080455037
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,layer=2
+   - photon num. 1: E=0.48037539839089927,pos=[8.32923639e-02 9.80988030e-14 9.80988030e-14],dir=[ 0.44724861  0.5873233  -0.67455172],w=0.5,layer=2
+next photon to simulate: E=1,pos=[1.00000000e-13 8.97695666e-14 8.97695666e-14],dir=[1.e+00 1.e-13 1.e-13],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.45926281714469597 vs 0.8976956662160166)
+Photon experiences COMPTON SCATTERING, preserves 60.91626220111858 % of initial energy!; E_abs = 0.19541868899440712
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.48037539839089927,pos=[8.32923639e-02 9.80988030e-14 9.80988030e-14],dir=[ 0.44724861  0.5873233  -0.67455172],w=0.5,layer=2
+   - photon num. 1: E=0.6091626220111858,pos=[4.59262817e-01 1.35695848e-13 1.35695848e-13],dir=[0.67214354 0.27238531 0.68849786],w=0.5,layer=2
+next photon to simulate: E=0.48037539839089927,pos=[8.32923639e-02 9.80988030e-14 9.80988030e-14],dir=[ 0.44724861  0.5873233  -0.67455172],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.44686705381951874 vs 1.8209185955649727)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.24018769919544963)
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.6091626220111858,pos=[4.59262817e-01 1.35695848e-13 1.35695848e-13],dir=[0.67214354 0.27238531 0.68849786],w=0.5,layer=2
+next photon to simulate: E=0.6091626220111858,pos=[4.59262817e-01 1.35695848e-13 1.35695848e-13],dir=[0.67214354 0.27238531 0.68849786],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.12307478659059015 vs 0.6522905038403628)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.3045813110055929)
+-->>Finish simulating 8-th photon
+
+
+
+
+---------simulating photon number 9
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,layer=1
+next photon to simulate: E=1,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0,cl=1
+
+ interaction takes place! as: s_free<lam (0.0496166135624594 vs 0.8976956662161166)
+Photon experiences COMPTON SCATTERING, preserves 68.22102851926982 % of initial energy!; E_abs = 0.3177897148073018
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.6822102851926982,pos=[4.96166136e-02 4.96166136e-15 4.96166136e-15],dir=[0.76196409 0.61922324 0.18966629],w=1.0,layer=1
+next photon to simulate: E=0.6822102851926982,pos=[4.96166136e-02 4.96166136e-15 4.96166136e-15],dir=[0.76196409 0.61922324 0.18966629],w=1.0,cl=1
+
+ NO INTERACTION as: s_free > lam (2.144277611812539 vs 1.1130170842414817)
+move to next layer on right
+Photon MOVES TO NEXT LAYER on right
+ ---photons to simulate (how many in queue: 2)--:
+   - photon num. 0: E=0.6822102851926982,pos=[1.00000000e-13 6.89206045e-01 2.11101818e-01],dir=[0.76196409 0.61922324 0.18966629],w=0.5,layer=2
+   - photon num. 1: E=0.6822102851926982,pos=[1.00000000e-13 6.89206045e-01 2.11101818e-01],dir=[0.76196409 0.61922324 0.18966629],w=0.5,layer=2
+next photon to simulate: E=0.6822102851926982,pos=[1.00000000e-13 6.89206045e-01 2.11101818e-01],dir=[0.76196409 0.61922324 0.18966629],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.1346377899970573 vs 1.1781338188009738)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.3411051425963491)
+ ---photons to simulate (how many in queue: 1)--:
+   - photon num. 0: E=0.6822102851926982,pos=[1.00000000e-13 6.89206045e-01 2.11101818e-01],dir=[0.76196409 0.61922324 0.18966629],w=0.5,layer=2
+next photon to simulate: E=0.6822102851926982,pos=[1.00000000e-13 6.89206045e-01 2.11101818e-01],dir=[0.76196409 0.61922324 0.18966629],w=0.5,cl=2
+
+ interaction takes place! as: s_free<lam (0.4406538895185534 vs 1.1781338188009738)
+Photon is absorbed via PHOTOEFFECT! (E_abs =0.3411051425963491)
+-->>Finish simulating 9-th photon
+
+
+
+~~~~~~~~~~~~~~~~~~FINISH SIMULATION~~~~~~~~~~~~~~~~
+

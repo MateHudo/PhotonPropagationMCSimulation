@@ -1,0 +1,208 @@
+~~~~~~~STARTING SIMULATION~~~~
+Properties:E0=5,N_sim=10,n_hvl=6,w_min=0.001
+   ----dimensions: ac0=0.4835;hvl0=1.4336;d=8.6014 (n_hvl*1.4336)
+
+
+------simulating photon num 0----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=2.1529964598378357; lam = 8.601441714462311)
+Photon produces pair e+e-, annihilation to two 511keV gammas follows at pp site!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[2.15299646e+00 2.15299646e-13 2.15299646e-13],dir=[ 0.23406052  0.90947127 -0.34362434],w=1.0
+   - photon num. 1: E=0.511,pos=[2.15299646e+00 2.15299646e-13 2.15299646e-13],dir=[-0.23406052 -0.90947127  0.34362434],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=1.8605998068569054; lam = 14.186443334418927)
+Photon is absorbed via photoeffect!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.511,pos=[2.15299646e+00 2.15299646e-13 2.15299646e-13],dir=[-0.23406052 -0.90947127  0.34362434],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.18698658316407596; lam = 9.198460414960206)
+Photon experiences Compoton scattering, preserves 70.22821267940704 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.35886616679176997,pos=[ 2.10923028 -0.17005892  0.06425314],dir=[ 0.33570442 -0.86270657 -0.37820618],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.7044682848369296; lam = 14.758324604075623)
+Photon experiences Compoton scattering, preserves 42.71774597928517 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.15329953753570613,pos=[ 2.3457234  -0.77780834 -0.20218111],dir=[-0.06737522  0.72955237  0.68059821],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.0022000825735975344; lam = 18.751184323895554)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+
+
+------simulating photon num 1----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=3.954162915192848; lam = 8.601441714462311)
+Photon produces pair e+e-, annihilation to two 511keV gammas follows at pp site!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[3.95416292e+00 3.95416292e-13 3.95416292e-13],dir=[ 0.321916   -0.8403675  -0.43606485],w=1.0
+   - photon num. 1: E=0.511,pos=[3.95416292e+00 3.95416292e-13 3.95416292e-13],dir=[-0.321916    0.8403675   0.43606485],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.06258096450720818; lam = 14.436309030149614)
+Photon experiences Compoton scattering, preserves 92.25297913659722 % of initial energy!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[3.95416292e+00 3.95416292e-13 3.95416292e-13],dir=[-0.321916    0.8403675   0.43606485],w=1.0
+   - photon num. 1: E=0.4714127233880118,pos=[ 3.97430873 -0.05259101 -0.02728936],dir=[ 0.57000647 -0.55940962 -0.60179191],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.3286907793172945; lam = 12.283213524494075)
+Photon experiences Compoton scattering, preserves 36.52548205866146 % of initial energy!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.4714127233880118,pos=[ 3.97430873 -0.05259101 -0.02728936],dir=[ 0.57000647 -0.55940962 -0.60179191],w=1.0
+   - photon num. 1: E=0.18664521331976008,pos=[3.8483521  0.27622105 0.1433305 ],dir=[-0.35247133 -0.91758455 -0.18385472],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.3964033040777361; lam = 8.117685075172451)
+Photon is absorbed via photoeffect!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.18664521331976008,pos=[3.8483521  0.27622105 0.1433305 ],dir=[-0.35247133 -0.91758455 -0.18385472],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.010949236324528227; lam = 10.918198811451084)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+
+
+------simulating photon num 2----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=3.326726196027113; lam = 8.601441714462311)
+Photon experiences Compoton scattering, preserves 84.52103500302115 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=4.226051750151058,pos=[3.3267262e+00 3.3267262e-13 3.3267262e-13],dir=[ 0.98128335  0.04932989 -0.18614387],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=1.4310922343794363; lam = 5.375323541915588)
+Photon produces pair e+e-, annihilation to two 511keV gammas follows at pp site!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[ 4.73103318  0.07059562 -0.26638904],dir=[ 0.07202704 -0.97461845  0.21196929],w=1.0
+   - photon num. 1: E=0.511,pos=[ 4.73103318  0.07059562 -0.26638904],dir=[-0.07202704  0.97461845 -0.21196929],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.11717489596363734; lam = 13.31060188046135)
+Photon is absorbed via photoeffect!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.511,pos=[ 4.73103318  0.07059562 -0.26638904],dir=[-0.07202704  0.97461845 -0.21196929],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.1550338307711424; lam = 13.165733654222542)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+
+
+------simulating photon num 3----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=4.6394995134416055; lam = 8.601441714462311)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+
+
+------simulating photon num 4----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=2.1625461216129747; lam = 8.601441714462311)
+Photon experiences Compoton scattering, preserves 36.26186149932636 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=1.8130930749663179,pos=[2.16254612e+00 2.16254612e-13 2.16254612e-13],dir=[ 0.82036119 -0.50544801  0.26745062],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.08135351787333742; lam = 7.848854497776258)
+Photon experiences Compoton scattering, preserves 99.75051405933866 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=1.8085696626531724,pos=[ 2.22928539 -0.04111997  0.02175805],dir=[ 0.80813415 -0.50511436  0.30294995],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.7940051022206496; lam = 7.885022908721654)
+Photon experiences Compoton scattering, preserves 26.925738983193938 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.48697074669522433,pos=[ 2.87094803 -0.44218335  0.26230185],dir=[0.69204037 0.7130294  0.11255755],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.704574617248104; lam = 8.280577173816226)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+
+
+------simulating photon num 5----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=3.1659791437416644; lam = 8.601441714462311)
+Photon produces pair e+e-, annihilation to two 511keV gammas follows at pp site!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[3.16597914e+00 3.16597914e-13 3.16597914e-13],dir=[ 0.12314166 -0.98438961 -0.12575066],w=1.0
+   - photon num. 1: E=0.511,pos=[3.16597914e+00 3.16597914e-13 3.16597914e-13],dir=[-0.12314166  0.98438961  0.12575066],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.0039110834394342; lam = 13.106764285979583)
+Photon experiences Compoton scattering, preserves 64.02438466877875 % of initial energy!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[3.16597914e+00 3.16597914e-13 3.16597914e-13],dir=[-0.12314166  0.98438961  0.12575066],w=1.0
+   - photon num. 1: E=0.3271646056574594,pos=[ 3.16646076e+00 -3.85002990e-03 -4.91821318e-04],dir=[ 0.00687356 -0.55079954  0.83460926],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.21570129681907715; lam = 13.10676428597894)
+Photon is absorbed via photoeffect!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.3271646056574594,pos=[ 3.16646076e+00 -3.85002990e-03 -4.91821318e-04],dir=[ 0.00687356 -0.55079954  0.83460926],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.022022769291096943; lam = 15.459514986099775)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+
+
+------simulating photon num 6----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.971801866177954; lam = 8.601441714462311)
+Photon experiences Compoton scattering, preserves 5.5514420862342115 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.2775721043117106,pos=[9.71801866e-01 9.71801866e-14 9.71801866e-14],dir=[-0.73876309 -0.64789651 -0.18563189],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.1720244534684747; lam = 1.315444523270694)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+
+
+------simulating photon num 7----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.4575077666390337; lam = 8.601441714462311)
+Photon experiences Compoton scattering, preserves 6.290686064264681 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.31453430321323406,pos=[4.57507767e-01 4.57507767e-14 4.57507767e-14],dir=[-0.52242407  0.85267172 -0.00490219],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.16393875951235562; lam = 0.8757402127280537)
+Photon experiences Compoton scattering, preserves 51.220924759581465 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.16110737879192444,pos=[ 0.37186221  0.13978594 -0.00080366],dir=[-0.13838967 -0.73035228 -0.66890496],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.018787737727685525; lam = 2.687066295980229)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+
+
+------simulating photon num 8----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=2.6395304357426097; lam = 8.601441714462311)
+Photon produces pair e+e-, annihilation to two 511keV gammas follows at pp site!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[2.63953044e+00 2.63953044e-13 2.63953044e-13],dir=[-0.3804659  -0.86304842  0.33225461],w=1.0
+   - photon num. 1: E=0.511,pos=[2.63953044e+00 2.63953044e-13 2.63953044e-13],dir=[ 0.3804659   0.86304842 -0.33225461],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.6008112346376965; lam = 6.937626915839952)
+Photon experiences Compoton scattering, preserves 39.41923205364773 % of initial energy!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[2.63953044e+00 2.63953044e-13 2.63953044e-13],dir=[ 0.3804659   0.86304842 -0.33225461],w=1.0
+   - photon num. 1: E=0.20143227579413994,pos=[ 2.41094225 -0.51852919  0.1996223 ],dir=[-0.1680921   0.33989302 -0.92532037],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.12246489430802053; lam = 14.949523388831441)
+Photon is absorbed via photoeffect!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.20143227579413994,pos=[ 2.41094225 -0.51852919  0.1996223 ],dir=[-0.1680921   0.33989302 -0.92532037],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.21299479792250847; lam = 14.1591878190341)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+
+
+------simulating photon num 9----
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=5,pos=[0. 0. 0.],dir=[1.e+00 1.e-13 1.e-13],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=1.1357743527363642; lam = 8.601441714462311)
+Photon experiences Compoton scattering, preserves 83.88057550956714 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=4.1940287754783565,pos=[1.13577435e+00 1.13577435e-13 1.13577435e-13],dir=[0.98036011 0.08357584 0.17863127],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=2.8316739846234715; lam = 7.615229625430811)
+Photon produces pair e+e-, annihilation to two 511keV gammas follows at pp site!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[3.91183457 0.23665952 0.50582553],dir=[-0.89676028  0.13118597  0.42262423],w=1.0
+   - photon num. 1: E=0.511,pos=[3.91183457 0.23665952 0.50582553],dir=[ 0.89676028 -0.13118597 -0.42262423],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.035718814424791696; lam = 4.362185351720104)
+Photon experiences Compoton scattering, preserves 53.62653965635672 % of initial energy!
+ ---photons to simulate (#=2)--:
+   - photon num. 0: E=0.511,pos=[3.91183457 0.23665952 0.50582553],dir=[ 0.89676028 -0.13118597 -0.42262423],w=1.0
+   - photon num. 1: E=0.2740316176439828,pos=[3.87980336 0.24134533 0.52092117],dir=[-0.5384794  -0.52397362 -0.65991786],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.38100821099559884; lam = 5.229499146120487)
+Photon is absorbed via photoeffect!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.2740316176439828,pos=[3.87980336 0.24134533 0.52092117],dir=[-0.5384794  -0.52397362 -0.65991786],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.29403852819390197; lam = 7.205110156865444)
+Photon experiences Compoton scattering, preserves 85.1681595128015 % of initial energy!
+ ---photons to simulate (#=1)--:
+   - photon num. 0: E=0.23338768523053754,pos=[3.72146967 0.08727689 0.32687989],dir=[-0.04880862  0.01915034 -0.99862455],w=1.0
+INTERACTION HAPPENS as s_free < lam (s_free=0.5920262462809286; lam = 13.247263469543523)
+Photon is absorbed via photoeffect!
+-->>Finish simulating 0-th photon
+~~~~~~~~~~~~~~~~~~FINISH SIMULATION~~~~~~~~~~~~~~~~
+
