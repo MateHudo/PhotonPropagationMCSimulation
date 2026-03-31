@@ -2,21 +2,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class LACLoader:
+    """
+    Load mass attenuation coefficients from a txt file and convert to linear attenuation coefficients (LAC).
+    Stores LACs for pair production (pp), Compton scattering (cs), photoelectric effect (pe), and their sum (total_simulation).
+    """
     def __init__(self, filename, material_density, material_name="MaterialName"):
         """
-        Load mass attenuation coefficients from a txt file and convert to linear attenuation coefficients (LAC).
-        Stores LACs for pair production (pp), Compton scattering (cs), photoelectric effect (pe), and their sum (total_simulation).
-
+        Initialize the LACLoader by loading data from the specified file and calculating LACs.
         Args:
             filename (str): Path to the MAC data file.
             material_density (float): Density of the material in g/cm^3.
             material_name (str): Name of the material for plot labeling.
         """
+        # Load data from the file
         data = np.loadtxt(filename)
+        # Extract energy and MAC values, convert to LAC by multiplying with material density
         self.energy = data[:, 0]
         self.lac_cs = data[:, 2] * material_density
         self.lac_pe = data[:, 3] * material_density
         self.lac_pp = (data[:, 4] + data[:, 5]) * material_density
+        #! For simultion, we consider three processes (CS, PE, PP) to calculate total LAC (others are ommited - like coherent scattering)
         self.lac_total_simulation = self.lac_cs + self.lac_pe + self.lac_pp
         self.material_name = material_name
 
@@ -85,4 +90,17 @@ class LACLoader:
         """
 
         return np.interp(energy_value, self.energy, self.lac_total_simulation)
+
+    def get_mean_free_path_at_energy(self, energy_value):
+        """
+        Get the mean free path at a specific energy using linear interpolation.
+
+        Args:
+            energy_value (float): Energy value in MeV.
+
+        Returns:
+            float: Interpolated mean free path in cm.
+        """
+        lac_at_energy = self.get_lac_at_energy(energy_value)
+        return 1 / lac_at_energy if lac_at_energy != 0 else np.inf
         
