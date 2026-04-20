@@ -76,6 +76,10 @@ class photon_box_propagation_simulator:
         self.rBo = np.array([0, 0, -self.box_sizeZ / 2])  # Bottom face position
         self.face_centers = np.array([self.rF, self.rB, self.rL, self.rR, self.rT, self.rBo])
 
+################################################
+# HELP METHODS FOR PHOTON PROPAGATION SIMULATION
+################################################
+
     def SphericalToCartesian(self, theta, phi):
         """
         Convert spherical coordinates to Cartesian coordinates.
@@ -272,9 +276,9 @@ class photon_box_propagation_simulator:
         # weight for pdf manipulation - exponential biasing with path extension factor (pef)
         weight_pdf = self.pef * np.exp(-lac_tot * free_path_length * (1 - 1/self.pef))
         # total weight is product of both
-        weight_total = weight_forcing * weight_pdf
+        #weight_total = weight_forcing * weight_pdf
         
-        return free_path_length, interaction_type, weight_total
+        return free_path_length, interaction_type, weight_pdf, weight_forcing
 
     def BoxPathLength3D(self, r_particle, u_particle):
         """
@@ -287,18 +291,18 @@ class photon_box_propagation_simulator:
         Returns:
             tuple: Minimum path length to exit the box and the index of the exit plane.
 
-    Bistvo pri računanju: 
-    i) Teorija:
-        # položaj in smer potovanja delca (unit vector): r0 = [x0,y0,z0] in u = [ux, uy, uz] (oz. omega)
-        # enačba ravnine: r * n = d; kjer r=[x,y,z], n=[nx,ny,nz] ~ normalni vektor ploskve, d = skalar = razdalja od izhodišča do ploskve
-        # za premik delca velja r(lambda) = r0 + lambda * u; uporabimo enačbo za ravnino: (r0 + lambda * u) * n = d
-        # rešitev za lambda: lambda = (d - r0 * n) / (u * n) ~ realno število - razdalja od začetne točke do ploskve, kjer delec seka ploskev
-    ii) Implementacija:
-        # u * n = cos(alpha); če |u|=|n|=1 & alpha = kot med vektorjema [splošno cos(alpha) = u * n / (|u|*|n|)]  
-        # če u * n = 0 --> delec ne seka ploskve, ampak gre vzporedno z njo (smer potovanja točno vzporedna s ploskvijo) --> lambda = inf
-        # če u * n > 0 --> delec seka ploskev, ki je v smeri potovanja (npr. če gre proti desni x ploskvi, potem n=[1,0,0] in u*n = ux > 0)
-        # če u * n < 0 --> delec seka ploskev, ki je v nasprotni smeri potovanja (npr. če gre proti levi x ploskvi, potem n=[-1,0,0] in u*n = -ux > 0)
-        # za vsako ploskev izračunamo lambda, nato pa vzamemo najmanjšo pozitivno lambda, ki nam pove, kje delec zapusti ploskev
+        Bistvo pri računanju: 
+        i) Teorija:
+            # položaj in smer potovanja delca (unit vector): r0 = [x0,y0,z0] in u = [ux, uy, uz] (oz. omega)
+            # enačba ravnine: r * n = d; kjer r=[x,y,z], n=[nx,ny,nz] ~ normalni vektor ploskve, d = skalar = razdalja od izhodišča do ploskve
+            # za premik delca velja r(lambda) = r0 + lambda * u; uporabimo enačbo za ravnino: (r0 + lambda * u) * n = d
+            # rešitev za lambda: lambda = (d - r0 * n) / (u * n) ~ realno število - razdalja od začetne točke do ploskve, kjer delec seka ploskev
+        ii) Implementacija:
+            # u * n = cos(alpha); če |u|=|n|=1 & alpha = kot med vektorjema [splošno cos(alpha) = u * n / (|u|*|n|)]  
+            # če u * n = 0 --> delec ne seka ploskve, ampak gre vzporedno z njo (smer potovanja točno vzporedna s ploskvijo) --> lambda = inf
+            # če u * n > 0 --> delec seka ploskev, ki je v smeri potovanja (npr. če gre proti desni x ploskvi, potem n=[1,0,0] in u*n = ux > 0)
+            # če u * n < 0 --> delec seka ploskev, ki je v nasprotni smeri potovanja (npr. če gre proti levi x ploskvi, potem n=[-1,0,0] in u*n = -ux > 0)
+            # za vsako ploskev izračunamo lambda, nato pa vzamemo najmanjšo pozitivno lambda, ki nam pove, kje delec zapusti ploskev
         """
         min_path_length = np.inf
         exit_plane_index = -1
@@ -330,35 +334,14 @@ class photon_box_propagation_simulator:
 
         Args:
             message (str): The message to be logged.
+        
+        !! LAHKO BI UVEDEL import logging ...
         """
         if self.verbose:
             print(message)
             #print(f"[DEBUG] {message}")
 
 
-#####################################################
-# CONFIGURATION (SETUP)
-#####################################################
-
-    def read_config(self,config):
-        """
-        Read the simulation configuration and set up the necessary parameters.
-
-        Args:
-            config (dict): Dictionary containing simulation configuration parameters.
-        """
-        self.config = config
-        #self._log(f"Configuration read: {config}") 
-
-        self.simulation_method = config['simulation_method']
-        self.Nsim = config['Nsim']
-        self.Srep_index = config['Srep_index'] # simulation repetition index
-        self.verbose = config['verbose']
-        self.start_weight = config['start_weight']
-        self.weight_min = config['weight_min'] # threshold for Russian roulette (to terminate low-weight photons and avoid infinite tracking)
-        self.survival_probability = config['survival_probability']  # survival probability for Russian roulette (if photon weight falls below threshold, it has this probability to survive and continue tracking with boosted weight)
-        self.pef = config['path_extension_factor']  # factor by which the free path
-        self.force_first_interaction = config['force_first_interaction']  # whether to force the first interaction of each photon (for variance reduction)
 
 
 ################################################################################################
@@ -407,6 +390,54 @@ class photon_box_propagation_simulator:
         # -------------------
         # UNPACK THE ARGUMENTS
         # -------------------
+        interaction_type, E_particle, u_particle, photons_to_simulate, r_particle_new = args 
+        #note: Velik je teh parametrov, spet dvom a je to smiselno/učinkovito/elegantno...?
+        #! alternatives: 
+            #* - args -> work with atributes (self; is this better, time consuming??)
+            #* -   kwargs - time more consuming as dict? (more readable?)
+
+        #! Need to add returned stuff...
+        #? photons_to_sumulate ? 
+        #new_photons = []
+
+        # N_absorbed += 1
+
+        # ---------------------------------------------
+        # COMPTON SCATTERING
+        # ----------------------------------------------
+        if interaction_type == 'compton':
+            E_particle_new, u_particle_new = self.ComptonScatteringInteraction(E_particle, u_particle)
+            self.E_absorbed += E_particle - E_particle_new
+            #self._log(f"Compton scattering: E_abs = {(E_particle - E_particle_new):.4f} MeV (E_new = {E_particle_new:.4f} MeV; E_abs_real = {(E_particle - E_particle_new):.4f} MeV)")
+            photons_to_simulate.append([r_particle_new, u_particle_new, E_particle_new])
+        
+        # ---------------- 
+        # PAIR PRODUCTION
+        # ----------------
+        elif interaction_type == 'pair':
+            u_pp = self.pair_prodution_new_direction() 
+            # add the two annihilation photons, emitted in opposite directions, to the list for simulation
+            photons_to_simulate.extend([
+                [r_particle_new, u_pp, self.annihilation_energy],
+                [r_particle_new, -u_pp, self.annihilation_energy]
+            ])
+            self.E_absorbed += E_particle - 2 * self.annihilation_energy
+            #self._log(f"Pair production: E_dep = {(E_particle - 2 * self.annihilation_energy):.4f} MeV")
+        
+        # -------------------
+        # PHOTOEFFECT (should not occur in forcing method, but we keep it for completeness)
+        # -------------------
+        else:
+            self.E_absorbed += E_particle  # all photon energy is absorbed in the interaction
+            #self._log(f"Photoeffect: E_abs = {E_particle:.4f} MeV")
+        
+        return photons_to_simulate 
+
+    def process_interaction_weighted(self, *args):
+
+        # -------------------
+        # UNPACK THE ARGUMENTS
+        # -------------------
         interaction_type, E_particle, weight_new, u_particle, photons_to_simulate, r_particle_new = args 
         #note: Velik je teh parametrov, spet dvom a je to smiselno/učinkovito/elegantno...?
         #! alternatives: 
@@ -415,7 +446,7 @@ class photon_box_propagation_simulator:
 
         #! Need to add returned stuff...
         #? photons_to_sumulate ? 
-        new_photons = []
+        #new_photons = []
 
         # N_absorbed += 1
 
@@ -426,21 +457,13 @@ class photon_box_propagation_simulator:
             E_particle_new, u_particle_new = self.ComptonScatteringInteraction(E_particle, u_particle)
             self.E_absorbed += weight_new*(E_particle - E_particle_new)  # add absorbed energy to the total
             #self._log(f"Compton scattering: E_abs = {weight_new*(E_particle - E_particle_new):.4f} MeV (E_new = {E_particle_new:.4f} MeV; E_abs_real = {(E_particle - E_particle_new):.4f} MeV)")
-            
-            #? Emin - necessary??
-            if E_particle_new > self.Emin_terminate:
-                # add scattered photon to the list for simulation
-                photons_to_simulate.append([r_particle_new, u_particle_new, E_particle_new, weight_new])
+            photons_to_simulate.append([r_particle_new, u_particle_new, E_particle_new, weight_new])
         
         # ---------------- 
         # PAIR PRODUCTION
         # ----------------
         elif interaction_type == 'pair':
-            # calculate directions of annihilated photons (isotropic distribution)
-            phi = np.random.uniform(0, 2 * np.pi)
-            th = np.arccos(np.random.uniform(-1, 1))
-            x, y, z = np.sin(th) * np.cos(phi), np.sin(th) * np.sin(phi), np.cos(th)
-            u_pp = np.array([x, y, z])
+            u_pp = self.pair_prodution_new_direction() 
             # add the two annihilation photons, emitted in opposite directions, to the list for simulation
             photons_to_simulate.extend([
                 [r_particle_new, u_pp, self.annihilation_energy, weight_new],
@@ -452,36 +475,36 @@ class photon_box_propagation_simulator:
         # -------------------
         # PHOTOEFFECT (should not occur in forcing method, but we keep it for completeness)
         # -------------------
-        #note: takele zadeve so verjetno problem interpereted jezikov, s C++ bi tole vrjetn elegantno rešu lahko...
-        #note: sreča pa je, da je PE zadnja interakcija vedno, če sploh, ker se foton potem absorbira
-        else:
-            if self.simulation_method in ['forcing', 'combined_VRM']:
-                raise ValueError("Photoeffect should not occur in PhotonFreePathForcing, check the code!")
-            else:
-                self.E_absorbed += weight_new * E_particle  # all photon energy is absorbed in the interaction
-                #self._log(f"Photoeffect: E_abs = {weight_new * E_particle:.4f} MeV")
+        #*** LEAVE THIS FOR NOW, problems with E_absorbed, but we dont care for buildup
+        # #note: takele zadeve so verjetno problem interpereted jezikov, s C++ bi tole vrjetn elegantno rešu lahko...
+        # #note: sreča pa je, da je PE zadnja interakcija vedno, če sploh, ker se foton potem absorbira
+        # else:
+        #     if self.simulation_method in ['forcing', 'combined_VRM']:
+        #         raise ValueError("Photoeffect should not occur in PhotonFreePathForcing, check the code!")
+        #     else:
+        #         #! For buildup, no need to count E_absorbed actually!
+        #         self.E_absorbed += weight_new * E_particle  # all photon energy is absorbed in the interaction
+        #         #self._log(f"Photoeffect: E_abs = {weight_new * E_particle:.4f} MeV")
         
-        return photons_to_simulate #?????????????????
+        return photons_to_simulate 
 
-    def update_weight_and_apply_russian_roulette(self, weight, weight_factor):
+    def russian_roulette(self, weight):
         
         # -------------------------------
-        # UPDATE WEIGHT, RUSSIAN ROULETTE
+        # RUSSIAN ROULETTE
         # -------------------------------
-        weight_new = weight * weight_factor
-        #self._log(f"\t*Free path length drawn: {free_path_length:.4f} cm; new weight: {weight_new:.4f}")
-        
-        if weight_new < self.weight_min:
+        alive = True
+        if weight < self.weight_min:
             #self._log(f"\t*Photon weight {weight_new:.4f} below threshold {self.weight_min:.4f}. Applying Russian roulette...")
             if np.random.rand() < self.survival_probability:
-                weight_new /= self.survival_probability
-                #self._log(f"Photon survived Russian roulette. New weight: {weight_new:.4f}")
+                weight /= self.survival_probability
+                #self._log(f"Photon survived Russian roulette. New weight: {weight:.4f}")
             else:
                 #self._log(f"Photon terminated by Russian roulette.")
                 self.N_weight_terminated += 1
-                return None  # signal that photon is terminated
+                alive = False  # signal that photon is terminated
         
-        return weight_new
+        return alive, weight
 
     def pair_prodution_new_direction(self):
         phi = np.random.uniform(0, 2 * np.pi)
@@ -492,12 +515,92 @@ class photon_box_propagation_simulator:
             np.cos(th)
             ])
 
+    def apply_path_extension(self,fpl,E):
+        """
+        
+        """
+        # extend free path length by pef
+        fpl *= self.pef
+        # compute weight_pdf for path extension
+        lac_tot = np.interp(E, self.lac_energy, self.lac_total)
+        weight_pdf = self.pef * np.exp(-lac_tot*fpl*(1-1/self.pef)) # w = p(d)/p_alt(d)
+        return fpl, weight_pdf
 
 
+####################################
+# FORCING  FIRST INTERACTION METHODS 
+####################################
 
-################################################################################################
-# SIMULATION METHODS
-################################################################################################
+    def first_interaction_forcing(self):
+        """
+        Forces the first interaction of a photon inside the box.
+        The interaction is CS or PP, we neglect PE as it does not contribute to buildup.
+        """
+        self.N_steps += 1
+
+        # ----------------------------------------------------------------------------
+        # 1. Force the first interaction inside the box - define weight and new position
+        # ----------------------------------------------------------------------------
+        #todo (test this code and loop succesfull rate, problematic for low N_hvl)
+        while True:
+            box_path_length, _ = self.BoxPathLength3D(self.r_entrance, self.u_entrance)
+            free_path_length, interaction_type, weight_factor = self.PhotonFreePathForcing(self.E0)
+            # free path must be less than path to exit
+            if free_path_length < box_path_length:
+                #self._log(f"\t*Forced interaction: free path length {free_path_length:.4f} cm is less than box path length {box_path_length:.4f} cm.")
+                break  # we have a valid forced interaction point, exit the loop
+        
+        # ---------------------
+        # 2. Calculate total weight
+        # ---------------------
+        weight_total = self.weight_first_interaction * weight_factor
+        initial_position = self.r_entrance + free_path_length * self.u_entrance 
+        #self._log(f"\t*Free path length drawn: {free_path_length:.4f} cm; new weight: {weight_total:.4f}")
+
+        # ------------------------------------------------------------------------------
+        # 3. Define new direction and energy - add photons to the list if int != PE; calculate Edep
+        # ------------------------------------------------------------------------------
+        return self.process_interaction_weighted(interaction_type, self.E0, weight_total, self.u_entrance, deque([]), initial_position)
+
+    def first_interaction_combined(self):
+        """
+        Forces the first interaction of a photon inside the box.
+        The interaction is CS or PP, we neglect PE as it does not contribute to buildup.
+        """
+        self.N_steps += 1
+
+        # ----------------------------------------------------------------------------
+        # 1. Force the first interaction inside the box - define weight and new position
+        # ----------------------------------------------------------------------------
+        #todo (test this code and loop succesfull rate, problematic for low N_hvl... or not, contemplte)
+        while True:
+            #* calculate d_exit and draw fpl, int type
+            box_path_length, _ = self.BoxPathLength3D(self.r_entrance, self.u_entrance)
+            free_path_length, interaction_type, weight_forcing = self.PhotonFreePathForcing(self.E0)        
+            #* prolong path, weight_pdf
+            free_path_length, weight_pdf = self.apply_path_extension(free_path_length, self.E0)
+            # free path must be less than path to exit
+            if free_path_length < box_path_length:
+                #self._log(f"\t*Forced interaction: free path length {free_path_length:.4f} cm is less than box path length {box_path_length:.4f} cm.")
+                break  
+        
+        # ---------------------
+        # 2. Calculate total weight
+        # ---------------------
+        #$ weight_force_1st = 1 - 2**(-N_hvl/2) right ??
+        weight_total = self.weight_first_interaction * weight_forcing * weight_pdf
+        initial_position = self.r_entrance + free_path_length * self.u_entrance  
+        #self._log(f"\t*Free path length drawn: {free_path_length:.4f} cm; new weight: {weight_total:.4f}")
+
+        # ------------------------------------------------------------------------------
+        # 3. Define new direction and energy - add photons to the list if int != PE; calculate Edep
+        # ------------------------------------------------------------------------------
+        return self.process_interaction_weighted(interaction_type, self.E0, weight_total, self.u_entrance, deque([]), initial_position)
+
+
+#########################################
+# OLDER SIMULATION CODE (september 2025)
+########################################
 
     def ParticleStep(self, PreStepParticleInfo):
         """
@@ -770,6 +873,12 @@ class photon_box_propagation_simulator:
         #* final report of the results
         #self.report_results()
  
+
+
+################################################################################################
+# SIMULATION METHODS: normal (buildup), pfd manipulation, forcing, combined VRM
+################################################################################################
+
     def simulate_buildup_calc(self):
         """ Simulates the propagation of photons through a defined box geometry.
             #! This is a simplified version of the simulate() method, focused only on calculating the buildup 
@@ -787,14 +896,15 @@ class photon_box_propagation_simulator:
         for eid in range(self.Nsim):
             #self._log(f"\nSimulating event {eid+1}/{self.Nsim}...")
             # Print progress
-            if eid in self.eid_progress_set:
-                print(f"\tProgress: {eid / self.Nsim * 100:.2f}% ({(dt.now() - self.start_time).total_seconds():.2f} sec)")
+            #if eid in self.eid_progress_set:
+            #    print(f"\tProgress: {eid / self.Nsim * 100:.2f}% ({(dt.now() - self.start_time).total_seconds():.2f} sec)")
 
             #* add initial photon to the list of photons to simulate - [r, u, E] - position, direction, energy
             photons_to_simulate = deque([[self.r_entrance,self.u_entrance,self.E0]]) # reset the list for new eid
 
-            ##########################################################
-            #* loop that continues until photons_to_simulate is empty
+            # ---------------
+            # loop while photons in the list to simulate
+            # ---------------
             while photons_to_simulate:
                 #+ Process the first photon in the list
                 self.N_steps += 1
@@ -805,60 +915,18 @@ class photon_box_propagation_simulator:
                 box_path_length, exit_plane_index = self.BoxPathLength3D(r_particle, u_particle)
                 free_path_length, interaction_type = self.PhotonFreePath(E_particle)
                 
-                #+ What happened in the step?
+                # --------------------
+                # ANALYZE STEP OUTCOME
+                # --------------------
                 #* a) Photon interacts inside the box (more likely, so we check this first)
                 if free_path_length < box_path_length:
                     # move particle inside the box to the interaction point
                     r_particle_new = r_particle + free_path_length * u_particle
-
-                    #* Compton
-                    if interaction_type == 'compton':
-                        E_particle_new, u_particle_new = self.ComptonScatteringInteraction(E_particle, u_particle)
-                        self.E_absorbed += E_particle - E_particle_new  # add absorbed energy to the total
-                        #self._log(f"Compton scattering: E_abs = {E_particle - E_particle_new}")
-                        # check for Emin_terminate condition (only necessary for CS)
-                        photons_to_simulate.append([r_particle_new, u_particle_new, E_particle_new])
-                    
-                    #* Pair production
-                    elif interaction_type == 'pair':
-                        # calculate directions of annihilated photons (isotropic distribution)
-                        phi = np.random.uniform(0, 2 * np.pi)
-                        th = np.arccos(np.random.uniform(-1, 1))
-                        x, y, z = np.sin(th) * np.cos(phi), np.sin(th) * np.sin(phi), np.cos(th)
-                        u_pp = np.array([x, y, z])
-                        # add the two annihilation photons, emitted in opposite directions, to the list for simulation
-                        photons_to_simulate.extend([
-                            [r_particle_new, u_pp, self.annihilation_energy],
-                            [r_particle_new, -u_pp, self.annihilation_energy]
-                        ])
-                        self.E_absorbed += E_particle - 2 * self.annihilation_energy
-                        #self._log(f"Pair production: E_abs = {E_particle - 2 * self.annihilation_energy}")
-                    
-                    #* Photoeffect 
-                    else:
-                        self.E_absorbed += E_particle  # all photon energy is absorbed in the interaction
-                        #self._log(f"Photoeffect: E_abs = {E_particle}")
-
-
-                #* b) Photon exits the box without interaction - count Eout; stop tracking
+                    self.N_box += 1
+                    photons_to_simulate = self.process_interaction(interaction_type, E_particle, u_particle, photons_to_simulate, r_particle_new)
+                #* b) Photon exits the box without interaction - count Eout; use old weight, stop tracking
                 else:
-                    #self._log(f"Photon exits the box without interaction. Exit plane index: {exit_plane_index}")
-                    if exit_plane_index == 0:  # Assuming exit_plane_index 0 is the right side of the box
-                        self.E_out_total += E_particle
-                        self.N_out_total += 1
-                        if E_particle == self.E0:  # non-interacted photon
-                            self.N_out_primaries += 1 
-                            self.E_out_primaries += E_particle
-                    elif exit_plane_index == 1:  # Assuming exit_plane_index 1 is the back side of the box
-                        self.E_backscattered += E_particle
-                        self.N_backscattered += 1
-                    else:
-                        self.N_leakage += 1
-                        self.E_leakage += E_particle
-                        #self._log(f"Photon exits the box through a leakage path. Exit plane index: {exit_plane_index}")
-                
-                ##########################################################
-                ##########################################################
+                    self.process_escaped_photon(exit_plane_index, 1, E_particle)
 
     def simulate_pdf_manipulation(self):
         """
@@ -874,161 +942,50 @@ class photon_box_propagation_simulator:
             if eid in self.eid_progress_set:
                 print(f"\tProgress: {eid / self.Nsim * 100:.2f}% ({(dt.now() - self.start_time).total_seconds():.2f} sec)")
 
-            #* add initial photon to the list of photons to simulate - [r, u, E, weight] - position, direction, energy, weight
+            # add initial photon
             photons_to_simulate = deque([[self.r_entrance,self.u_entrance,self.E0, self.start_weight]]) # reset the list for new eid
 
-            ##########################################################
-            #* loop that continues until photons_to_simulate is empty
+            # ---------------------
+            # ...
+            # ---------------------
             while photons_to_simulate:
-                #+ Process the first photon in the list
+                # ------------------------------------
+                # Process the first photon in the list
+                # ------------------------------------
                 self.N_steps += 1
-                # photon info: position, direction, energy, weight
                 r_particle, u_particle, E_particle, weight = photons_to_simulate.popleft()     
                 #self._log(f"\t*Processing photon with E={E_particle:.4f} MeV at position {r_particle}, direction {u_particle} and weight {weight:.4f}")           
-                # Calculate the path length to exit the box and the interaction free path length
                 box_path_length, exit_plane_index = self.BoxPathLength3D(r_particle, u_particle)
+                
+                # --------------------------------
+                # Free path (extended); new weight
+                # --------------------------------
                 free_path_length, interaction_type = self.PhotonFreePath(E_particle)
-                
-                
-                #+ extend the path; change weight; apply Russian roulette
-                free_path_length *= self.pef  # we apply pdf_manipulated(d) = lac/pef * exp(-(1-1/pef)*lac*d) - lac-> lac/pef
-                
-                ###weight_new = weight * 2**(1 - 0.5*free_path_length/self.half_value_layer) - WRONG, LAC=LAC(E) must be considered!
+                free_path_length, weight_pdf = self.apply_path_extension(free_path_length, E_particle)
                 #note: use energy-dependent HVL (not HVL at E0) so secondary photons (E != E0) get the correct step weight
-                hvl_E = np.log(2) / np.interp(E_particle, self.lac_energy, self.lac_total)
-                weight_new = weight * self.pef * 2**(- (1-1/self.pef)*free_path_length/hvl_E)  # w = p(d)/p_alt(d) = pef*exp(-lac(E)*d*(1-1/pef)) = pef*2^(-d/hvl(E)*(1-1/pef))
+                weight_new = weight * weight_pdf 
                 #self._log(f"\t*Free path lenght drawn: {free_path_length:.4f} cm; new weight: {weight_new:.4f}")
                 
                 # -------------------------------
-                # WEIGHT UPDATE, RUSSIAN ROULETTE
+                # RUSSIAN ROULETTE
                 # -------------------------------
-                if weight_new < self.weight_min:  # threshold for Russian roulette
-                    #self._log(f"\t*Photon weight {weight_new:.4f} below threshold {self.weight_min:.4f}. Applying Russian roulette...")
-                    if np.random.rand() < self.survival_probability:  # survival probability 
-                        weight_new /= self.survival_probability  # boost weight if survives
-                        #self._log(f"\t*Photon survived Russian roulette. New weight: {weight_new:.4f}")
-                    else:
-                        #self._log(f"\t*Photon terminated by Russian roulette.")
-                        self.N_weight_terminated += 1  # count terminated photons
-                        continue  # photon is terminated, skip to next iteration
-
-                # -------------------------------
-                # ...
-                # -------------------------------
+                alive, weight_new = self.russian_roulette(weight_new)
+                #* terminate photon if it did not survive Russian roulette
+                if not alive:
+                    continue
+                
+                # --------------------
+                # ANALYZE STEP OUTCOME
+                # --------------------
                 #* a) Photon interacts inside the box (more likely, so we check this first)
                 if free_path_length < box_path_length:
                     # move particle inside the box to the interaction point
                     r_particle_new = r_particle + free_path_length * u_particle
-
-                    #* Compton
-                    if interaction_type == 'compton':
-                        E_particle_new, u_particle_new = self.ComptonScatteringInteraction(E_particle, u_particle)
-                        self.E_absorbed += weight_new*(E_particle - E_particle_new)  # add absorbed energy to the total
-                        #self._log(f"Compton scattering: E_abs = {weight_new*(E_particle - E_particle_new):.4f} MeV")
-                        photons_to_simulate.append([r_particle_new, u_particle_new, E_particle_new, weight_new])
-                    
-                    #* Pair production
-                    elif interaction_type == 'pair':
-                        # calculate directions of annihilated photons (isotropic distribution)
-                        phi = np.random.uniform(0, 2 * np.pi)
-                        th = np.arccos(np.random.uniform(-1, 1))
-                        x, y, z = np.sin(th) * np.cos(phi), np.sin(th) * np.sin(phi), np.cos(th)
-                        u_pp = np.array([x, y, z])
-                        # add the two annihilation photons, emitted in opposite directions, to the list for simulation
-                        photons_to_simulate.extend([
-                            [r_particle_new, u_pp, self.annihilation_energy, weight_new],
-                            [r_particle_new, -u_pp, self.annihilation_energy, weight_new]
-                        ])
-                        self.E_absorbed += weight_new*(E_particle - 2 * self.annihilation_energy)
-                        #self._log(f"Pair production: E_abs = {weight_new*(E_particle - 2 * self.annihilation_energy):.4f} MeV")
-                    
-                    #* Photoeffect 
-                    else:
-                        self.E_absorbed += weight_new * E_particle  # all photon energy is absorbed in the interaction
-                        #self._log(f"Photoeffect: E_abs = {weight_new * E_particle:.4f} MeV")
-
-
-                #* b) Photon exits the box without interaction - count Eout; stop tracking
+                    self.N_box += 1
+                    photons_to_simulate = self.process_interaction_weighted(interaction_type, E_particle, weight_new, u_particle, photons_to_simulate, r_particle_new)
+                #* b) Photon exits the box without interaction - count Eout; use old weight, stop tracking
                 else:
-                    if exit_plane_index == 0:  # Assuming exit_plane_index 0 is the right side of the box
-                        self.E_out_total += weight_new * E_particle
-                        self.N_out_total += 1
-                        #self._log(f"Photon exits the box without interaction. E_out_total = {weight_new * E_particle:.4f} MeV")
-                        if E_particle == self.E0:  # non-interacted photon
-                            self.N_out_primaries += 1 
-                            self.E_out_primaries += weight_new * E_particle
-                    elif exit_plane_index == 1:  # Assuming exit_plane_index 1 is the back side of the box
-                        self.E_backscattered += weight_new * E_particle
-                        self.N_backscattered += 1
-                        #self._log(f"Photon exits the box through backscatter. E_backscattered = {weight_new * E_particle:.4f} MeV")
-                    else:
-                        self.N_leakage += 1
-                        self.E_leakage += weight_new * E_particle
-                        #self._log(f"Photon exits the box through a leakage path. E_leakage = {weight_new * E_particle:.4f} MeV (exit plane index: {exit_plane_index})")
-                
-                ##########################################################
-                ##########################################################
-
-    def first_interaction_forcing(self, path_length_manipulation = False):
-        """
-        Forces the first interaction of a photon inside the box.
-        The interaction is CS or PP, we neglect PE as it does not contribute to buildup.
-        """
-        self.N_steps += 1
-        weight_pdf = 1
-
-        # ----------------------------------------------------------------------------
-        # 1. Force the first interaction inside the box - define weight and new position
-        # ----------------------------------------------------------------------------
-        #todo (test this code and loop succesfull rate, problematic for low N_hvl)
-        while True:
-            box_path_length, _ = self.BoxPathLength3D(self.r_entrance, self.u_entrance)
-            free_path_length, interaction_type, weight_factor = self.PhotonFreePathForcing(self.E0)
-            
-            # if path_length_manipulation is True, we also apply pdf manipulation
-            if path_length_manipulation:
-                free_path_length *= self.pef
-                # compute weight_pdf for path extension (same as in simulate_pdf_manipulation method)
-                lac_tot = np.interp(self.E0, self.lac_energy, self.lac_total)
-                weight_pdf = self.pef * np.exp(-lac_tot*free_path_length*(1-1/self.pef))  
-            
-            # free path must be less than path to exit
-            if free_path_length < box_path_length:
-                #self._log(f"\t*Forced interaction: free path length {free_path_length:.4f} cm is less than box path length {box_path_length:.4f} cm.")
-                break  # we have a valid forced interaction point, exit the loop
-        
-        # ---------------------
-        # 2. Calculate total weight
-        # ---------------------
-        weight_total = (1 - 2**(-self.num_hvlX)) * weight_factor * weight_pdf
-        initial_position = self.r_entrance + free_path_length * self.u_entrance  # position of the forced interaction
-        #self._log(f"\t*Free path length drawn: {free_path_length:.4f} cm; new weight: {weight_total:.4f}")
-
-        # ------------------------------------------------------------------------------
-        # 3. Define new direction and energy - add photons to the list if int != PE; calculate Edep
-        # ------------------------------------------------------------------------------
-        if interaction_type == 'compton':
-            E_particle_new, u_particle_new = self.ComptonScatteringInteraction(self.E0, self.u_entrance)
-            E_abs = weight_total*(self.E0 - E_particle_new)  # add absorbed energy to the total
-            #self._log(f"Compton scattering: E_abs = {E_abs:.4f} MeV (E_new = {E_particle_new:.4f} MeV; E_abs_real = {(self.E0 - E_particle_new):.4f} MeV)")
-            photons_to_simulate = deque([[initial_position, u_particle_new, E_particle_new, weight_total]])  # start with the scattered photon
-        elif interaction_type == 'pair':
-            # calculate directions of annihilated photons (isotropic distribution)
-            phi = np.random.uniform(0, 2 * np.pi)
-            th = np.arccos(np.random.uniform(-1, 1))
-            x, y, z = np.sin(th) * np.cos(phi), np.sin(th) * np.sin(phi), np.cos(th)
-            u_pp = np.array([x, y, z])
-            # add the two annihilation photons, emitted in opposite directions, to the list for simulation
-            photons_to_simulate = deque([
-                [initial_position, u_pp, self.annihilation_energy, weight_total],
-                [initial_position, -u_pp, self.annihilation_energy, weight_total]
-            ])
-            E_abs = weight_total*(self.E0 - 2 * self.annihilation_energy)
-            #self._log(f"Pair production: E_dep = {E_dep:.4f} MeV")
-        else:
-            raise ValueError("Unexpected interaction type for forced first interaction. Expected 'compton' or 'pair'.")
-        
-        return photons_to_simulate, E_abs
+                    self.process_escaped_photon(exit_plane_index, weight_new, E_particle)
 
     def simulate_forcing_interactions(self):
         """
@@ -1039,7 +996,7 @@ class photon_box_propagation_simulator:
         # LOOP OVER ALL SIMULATED PHOTONS
         # --------------------------------
         for eid in range(self.Nsim):
-            #self._log(f"\nSimulating event {eid+1}/{Nsim}")
+            #self._log(f"\nSimulating event {eid+1}/{self.Nsim}")
             # Print progress
             if eid in self.eid_progress_set:
                 print(f"\tProgress: {eid / self.Nsim * 100:.2f}% ({(dt.now() - self.start_time).total_seconds():.2f} sec)")
@@ -1049,99 +1006,52 @@ class photon_box_propagation_simulator:
             # --------------------
             if self.force_first_interaction:
                 #self._log(f"\t*Processing the initial photon with E={self.E0:.4f} MeV at position {self.r_entrance} and direction {self.u_entrance} with forcing the first interaction...")
-                photons_to_simulate, E_abs_forced = self.first_interaction_forcing()
-                self.E_absorbed += E_abs_forced  # add the energy absorbed in the forced interaction to the total
+                photons_to_simulate = self.first_interaction_forcing()
             else:
                 photons_to_simulate = deque([[self.r_entrance,self.u_entrance,self.E0, self.start_weight]]) # reset the list for new eid
-
 
             # -----------------------------
             # LOOP OVER PHOTONS TO SIMULATE
             # -----------------------------
             while photons_to_simulate:
-                #+ Process the first photon in the list
+
+                # ------------------------------------
+                # PROCESS THE FIRST PHOTON IN THE LIST
+                # ------------------------------------
                 self.N_steps += 1
-                # photon info: position, direction, energy, weight
-                r_particle, u_particle, E_particle, weight = photons_to_simulate.popleft()     
+                r_particle, u_particle, E_particle, weight = photons_to_simulate.popleft() 
                 #self._log(f"\t*Processing photon with E={E_particle:.4f} MeV at position {r_particle}, direction {u_particle} and weight {weight:.4f}")           
-                # Calculate the path length to exit the box and the interaction free path length
                 box_path_length, exit_plane_index = self.BoxPathLength3D(r_particle, u_particle)
-                # use PhotonFreePathForcing to ensure PP or CS, not PE
                 free_path_length, interaction_type, weight_factor = self.PhotonFreePathForcing(E_particle)
                 
-
-                #+ What happened in the step (if photons survived)?
-                #* a) Photon interacts inside the box (more likely, so we check this first)
+                # --------------------
+                # ANALYZE STEP OUTCOME
+                # --------------------
                 if free_path_length < box_path_length:
                     # move particle inside the box to the interaction point
                     r_particle_new = r_particle + free_path_length * u_particle
-                    
+                    self.N_box += 1
+
                     # -------------------------------
-                    # UPDATE WEIGHT, RUSSIAN ROULETTE (only here, if it escapes, no weight update as no interaction occurs)
+                    # UPDATE WEIGHT, RUSSIAN ROULETTE
                     # -------------------------------
-                    weight_new = weight * weight_factor  # weights multiply; here w<1 always!
+                    weight_new = weight * weight_factor
                     #self._log(f"\t*Free path length drawn: {free_path_length:.4f} cm; new weight: {weight_new:.4f}")
-                    #* Russian roulette for photon termination (to avoid infinite tracking of low-weight photons)
-                    if weight_new < self.weight_min:  # threshold for Russian roulette
-                        #self._log(f"\t*Photon weight {weight_new:.4f} below threshold {self.weight_min:.4f}. Applying Russian roulette...")
-                        if np.random.rand() < self.survival_probability:  # survival probability 
-                            weight_new /= self.survival_probability  # boost weight if survives
-                            #self._log(f"\t*Photon survived Russian roulette. New weight: {weight_new:.4f}")
-                        else:
-                            #self._log(f"Photon terminated by Russian roulette.")
-                            self.N_weight_terminated += 1  # count terminated photons
-                            continue  # photon is terminated, skip to next iteration
-
-                    #* Compton
-                    if interaction_type == 'compton':
-                        E_particle_new, u_particle_new = self.ComptonScatteringInteraction(E_particle, u_particle)
-                        self.E_absorbed += weight_new*(E_particle - E_particle_new)  # add absorbed energy to the total
-                        #self._log(f"Compton scattering: E_abs = {weight_new*(E_particle - E_particle_new):.4f} MeV (E_new = {E_particle_new:.4f} MeV; E_abs_real = {(E_particle - E_particle_new):.4f} MeV)")
-                        photons_to_simulate.append([r_particle_new, u_particle_new, E_particle_new, weight_new])
-
+                    #* Russian Roulette
+                    alive, weight_new = self.russian_roulette(weight_new)
+                    if not alive:
+                        continue
                     
-                    #* Pair production
-                    elif interaction_type == 'pair':
-                        # calculate directions of annihilated photons (isotropic distribution)
-                        phi = np.random.uniform(0, 2 * np.pi)
-                        th = np.arccos(np.random.uniform(-1, 1))
-                        x, y, z = np.sin(th) * np.cos(phi), np.sin(th) * np.sin(phi), np.cos(th)
-                        u_pp = np.array([x, y, z])
-                        # add the two annihilation photons, emitted in opposite directions, to the list for simulation
-                        photons_to_simulate.extend([
-                            [r_particle_new, u_pp, self.annihilation_energy, weight_new],
-                            [r_particle_new, -u_pp, self.annihilation_energy, weight_new]
-                        ])
-                        self.E_absorbed += weight_new*(E_particle - 2 * self.annihilation_energy)
-                        #self._log(f"Pair production: E_abs = {weight_new*(E_particle - 2 * self.annihilation_energy):.4f} MeV")
-                    
-                    #* Photoeffect 
-                    else:
-                        return ValueError("Photoeffect should not occur in PhotonFreePathForcing, check the code!")
-                        #self.E_absorbed += weight_new * E_particle  # all photon energy is absorbed in the interaction
-                        #self._log(f"Photoeffect: E_dep = {weight_new * E_particle:.4f} MeV")
-
-
-                #* b) Photon exits the box without interaction - count Eout; use old weight, stop tracking
-                else:
-                    if exit_plane_index == 0:  # Assuming exit_plane_index 0 is the right side of the box
-                        self.E_out_total += weight * E_particle
-                        self.N_out_total += 1
-                        #self._log(f"Photon exits the box without interaction. E_out_total = {weight * E_particle:.4f} MeV")
-                        if E_particle == self.E0:  # non-interacted photon
-                            self.N_out_non_interacted += 1 
-                            self.E_out_non_interacted += weight * E_particle
-                    elif exit_plane_index == 1:  # Assuming exit_plane_index 1 is the back side of the box
-                        self.E_backscattered += weight * E_particle
-                        self.N_backscattered += 1
-                        #self._log(f"Photon exits the box through backscatter. E_backscattered = {weight * E_particle:.4f} MeV")
-                    else:
-                        self.N_leakage += 1
-                        self.E_leakage += weight * E_particle
-                        #self._log(f"Photon exits the box through a leakage path. E_leakage = {weight * E_particle:.4f} MeV (exit plane index: {exit_plane_index})")
+                    # ----------------
+                    # PROCESS INTERACTION
+                    # ----------------
+                    photons_to_simulate = self.process_interaction_weighted(interaction_type, E_particle, weight_new, u_particle, photons_to_simulate, r_particle_new)
                 
-                ##########################################################
-                ##########################################################
+                # -------------
+                # EXIT FROM BOX
+                #--------------
+                else:
+                    self.process_escaped_photon(exit_plane_index, weight, E_particle) #! Here must use weight, not weight_new
 
     def simulate_combinedVRM(self):
         """
@@ -1153,23 +1063,19 @@ class photon_box_propagation_simulator:
         # -------------------------------
         for eid in range(self.Nsim):
 
-            # ---------------------------
-            # PRINT PROGRESS
-            # ---------------------------
-            #self._log(f"\nSimulating event {eid+1}/{Nsim}")
+            # -------------------------
+            # #### PRINT PROGRESS #####
+            # -------------------------
+            #self._log(f"\nSimulating event {eid+1}/{self.Nsim}")
             if eid in self.eid_progress_set:
                 print(f"\tProgress: {eid / self.Nsim * 100:.2f}% ({(dt.now() - self.start_time).total_seconds():.2f} sec)")
 
             # --------------------
             # INITIALIZE NEW PHOTON
             # --------------------
-            # Force the first interaction - or not
             if self.force_first_interaction:
-                #? Is counting correct and complete in first_interaction_forcing method?
                 #self._log(f"\t*Processing the initial photon with E={self.E0:.4f} MeV at position {self.r_entrance} and direction {self.u_entrance} with forcing the first interaction and path length manipulation...")
-                # use first_interaction_forcing method and use kwarg path_extension_factor to also apply pdf manipulation to the forced step
-                photons_to_simulate, E_abs_forced = self.first_interaction_forcing(path_length_manipulation=True)
-                self.E_absorbed += E_abs_forced  # add the energy absorbed in the forced interaction to the total
+                photons_to_simulate = self.first_interaction_combined()
             else:
                 photons_to_simulate = deque([[self.r_entrance,self.u_entrance,self.E0, self.start_weight]])
 
@@ -1185,31 +1091,10 @@ class photon_box_propagation_simulator:
                 self.N_steps += 1
                 r_particle, u_particle, E_particle, weight = photons_to_simulate.popleft() 
                 #self._log(f"\t*Processing photon with E={E_particle:.4f} MeV at position {r_particle}, direction {u_particle} and weight {weight:.4f}")           
-                # Calculate the path length to exit the box and the interaction free path length
                 box_path_length, exit_plane_index = self.BoxPathLength3D(r_particle, u_particle)
-                # PhotonFreePathCombinedVRM for fpl, int_type, weight
-                free_path_length, interaction_type, weight_factor = self.PhotonFreePathCombinedVRM(E_particle)
+                free_path_length, interaction_type, weight_pdf, weight_forcing = self.PhotonFreePathCombinedVRM(E_particle)
                 
-                # -------------------------------
-                # UPDATE WEIGHT, RUSSIAN ROULETTE
-                # -------------------------------
-                #? If the photon exits, its perhaps bad that we terminate it (as we are calculating buildup)?
-                #? maybe it is actually necessarry to kill it for the result to be accurate???
-                weight_new = weight * weight_factor
-                #self._log(f"\t*Free path length drawn: {free_path_length:.4f} cm; new weight: {weight_new:.4f}")
-                if weight_new < self.weight_min:
-                    #self._log(f"\t*Photon weight {weight_new:.4f} below threshold {self.weight_min:.4f}. Applying Russian roulette...")
-                    if np.random.rand() < self.survival_probability:
-                        weight_new /= self.survival_probability
-                        #self._log(f"Photon survived Russian roulette. New weight: {weight_new:.4f}")
-                    else:
-                        #self._log(f"Photon terminated by Russian roulette.")
-                        self.N_weight_terminated += 1
-                        #? is adding to the termination energy of any sense??
-                        #self.E_weight_terminated += weight_new * E_particle  # add the energy of the terminated photon to the total
-                        continue  # skip to next photon if terminated
                 
-
                 # --------------------
                 # ANALYZE STEP OUTCOME
                 # --------------------
@@ -1218,76 +1103,58 @@ class photon_box_propagation_simulator:
                     # move particle inside the box to the interaction point
                     r_particle_new = r_particle + free_path_length * u_particle
                     self.N_box += 1
-
-                    # --------
-                    # COMPTON
-                    # --------
-                    if interaction_type == 'compton':
-                        E_particle_new, u_particle_new = self.ComptonScatteringInteraction(E_particle, u_particle)
-                        self.E_absorbed += weight_new*(E_particle - E_particle_new)  # add absorbed energy to the total
-                        #self._log(f"Compton scattering: E_abs = {weight_new*(E_particle - E_particle_new):.4f} MeV (E_new = {E_particle_new:.4f} MeV; E_abs_real = {(E_particle - E_particle_new):.4f} MeV)")
-                        # add scattered photon to the list for simulation if above termination threshold (only necessary for CS)
-                        photons_to_simulate.append([r_particle_new, u_particle_new, E_particle_new, weight_new])
-                    
-                    # ----------
-                    # PAIR PRODUCTION
-                    # ----------
-                    elif interaction_type == 'pair':
-                        # calculate directions of annihilated photons (isotropic distribution)
-                        phi = np.random.uniform(0, 2 * np.pi)
-                        th = np.arccos(np.random.uniform(-1, 1))
-                        x, y, z = np.sin(th) * np.cos(phi), np.sin(th) * np.sin(phi), np.cos(th)
-                        u_pp = np.array([x, y, z])
-                        # add the two annihilation photons, emitted in opposite directions, to the list for simulation
-                        photons_to_simulate.extend([
-                            [r_particle_new, u_pp, self.annihilation_energy, weight_new],
-                            [r_particle_new, -u_pp, self.annihilation_energy, weight_new]
-                        ])
-                        self.E_absorbed += weight_new*(E_particle - 2 * self.annihilation_energy)
-                        #self._log(f"Pair production: E_dep = {weight_new*(E_particle - 2 * self.annihilation_energy):.4f} MeV")
-                    
-                    # ---------
-                    # PHOTOEFFECT
-                    # ---------
-                    else:
-                        return ValueError("Photoeffect should not occur in PhotonFreePathForcing, check the code!")
-                        #self.E_absorbed += weight_new * E_particle  # all photon energy is absorbed in the interaction
-                        #self._log(f"Photoeffect: E_abs = {weight_new * E_particle:.4f} MeV")
-
-
+                    # w_new and Russian Roulette
+                    weight_new = weight * weight_pdf * weight_forcing
+                    alive, weight_new = self.russian_roulette(weight_new)
+                    if not alive:
+                        continue
+                    photons_to_simulate = self.process_interaction_weighted(interaction_type, E_particle, weight_new, u_particle, photons_to_simulate, r_particle_new)
                 #* b) Photon exits the box without interaction - count Eout; use old weight, stop tracking
                 else:
-                    # ---------------------------------------------
-                    # RIGHT SIDE EXIT (non-interacted or interacted)
-                    # ----------------------------------------------
-                    if exit_plane_index == 0:  # Assuming exit_plane_index 0 is the right side of the box
-                        self.E_out_total += weight_new * E_particle
-                        self.N_out_total += 1
-                        #self._log(f"Photon exits the box without interaction. E_out_total = {weight_new * E_particle:.4f} MeV")
-                        if E_particle == self.E0:  # non-interacted photon
-                            self.N_out_primaries += 1 
-                            self.E_out_primaries += weight_new * E_particle
+                    # w_new (!! without weight_forcing !!) and RR
+                    weight_new = weight * weight_pdf
+                    alive, weight_new = self.russian_roulette(weight_new)
+                    if not alive:
+                        continue
+                    self.process_escaped_photon(exit_plane_index, weight_new, E_particle)
 
-                    # ------------------
-                    # BACKSCATTERED EXIT
-                    # ------------------
-                    elif exit_plane_index == 1:  # Assuming exit_plane_index 1 is the back side of the box
-                        self.E_backscattered += weight_new * E_particle
-                        self.N_backscattered += 1
-                        #self._log(f"Photon exits the box through backscatter. E_backscattered = {weight_new * E_particle:.4f} MeV")
-                    # ------------
-                    # LEAKAGE EXIT
-                    # ------------
-                    else:
-                        self.N_leakage += 1
-                        self.E_leakage += weight_new * E_particle
-                        #self._log(f"Photon exits the box through a leakage path. E_leakage = {weight_new * E_particle:.4f} MeV (exit plane index: {exit_plane_index})")
-                
-                    #! alternative: use process_escaped_photon
-                    #self.process_escaped_photon(exit_plane_index, weight_new, E_particle)
 
-                ##########################################################
-                ##########################################################
+
+
+
+#####################################################
+# CONFIGURATION (SETUP)
+#####################################################
+
+    def read_config(self,config):
+        """
+        Read the simulation configuration and set up the necessary parameters.
+
+        Args:
+            config (dict): Dictionary containing simulation configuration parameters.
+        """
+        self.config = config
+        #self._log(f"Configuration read: {config}") 
+
+        self.simulation_method = config['simulation_method']
+        self.Nsim = config['Nsim']
+        self.Srep_index = config['Srep_index'] # simulation repetition index
+        self.verbose = config['verbose']
+        self.start_weight = config['start_weight']
+        self.weight_min = config['weight_min'] # threshold for Russian roulette (to terminate low-weight photons and avoid infinite tracking)
+        self.survival_probability = config['survival_probability']  # survival probability for Russian roulette (if photon weight falls below threshold, it has this probability to survive and continue tracking with boosted weight)
+        self.pef = config['path_extension_factor']  # factor by which the free path
+        self.force_first_interaction = config['force_first_interaction']  # whether to force the first interaction of each photon (for variance reduction)
+
+        #* place for additional attributes definitios
+        self.weight_first_interaction = 1 - 2**(-self.num_hvlX)
+        if self.simulation_method == "combined":
+            self.weight_first_interaction = 1 - 2**(-self.num_hvlX/self.pef)
+        #? kako bi tole bolš naredu? Nekateri parameteri so relavantni le pri nekaterih metodah... (weight_min, pef, ...)
+        self.simulate_primaries = True
+        if self.simulation_method in ["forcing", "combined"] and self.force_first_interaction:
+            self.simulate_primaries = False
+
 
 #################
 #################
@@ -1309,33 +1176,29 @@ class photon_box_propagation_simulator:
         # PRINT SIMULATION SETTINGS; start the clock for simulation time measurement
         # ---------------------------------------------------------------------------
         #fix: This shall maybe also be managed, changed and/or packed in its own method...
-        print(f"\n\nStarting simulation.")
-        print(f"Setup: method={self.simulation_method}, E0={self.E0} MeV, num_hvlX = {self.num_hvlX}, {self.Nsim} events")
+        #print(f"\n\nStarting simulation.")
+        #print(f"Setup: method={self.simulation_method}, E0={self.E0} MeV, num_hvlX = {self.num_hvlX}, {self.Nsim} events")
         #print(f"\t?Force first interaction: {self.force_first_interaction}") ##? what to do with this?? 
-        if self.force_first_interaction:
-            # for now no code in this if statement, so simply use pass
-            pass # what pass does? -> enables code to run without doing anything in this if statement; we just want to print the info about forcing the first interaction, but the actual forcing is implemented in the first_interaction_forcing method, which is called later in the code (and also applies pdf manipulation to the forced step if path_length_manipulation is True)
-            #self.simulation_method += "_1st" #! rather than this, save bool (named force_first_interaction) 
-        print("\n")
+        
 
         # ----------------------------
         # START SIMULATION TIME MEASUREMENT
         # ----------------------------
         self.start_time = dt.now()
 
-        # ---------------
+        # --------------------------------------------
         # RUN SIMULATION (based on the selected method)
-        # ---------------
-        if self.simulation_method == 'combined':
+        # --------------------------------------------
+        #note: can use different mathod names for some methods! Suggestion: all methods manes of same length - more elegant results!
+        if self.simulation_method in ['combined','combine',"combined_vrm"]:
             self.simulate_combinedVRM()
         elif self.simulation_method == 'forcing':
             self.simulate_forcing_interactions()
-        elif self.simulation_method == 'pdf':
+        elif self.simulation_method in ['pdf', 'pdf_man']:
             self.simulate_pdf_manipulation()
         elif self.simulation_method == 'buildup':
             self.simulate_buildup_calc()
         else:
-            #! simulate method is ommited here!
             raise ValueError(f"Unknown simulation method: {self.simulation_method}")
 
         
@@ -1348,19 +1211,19 @@ class photon_box_propagation_simulator:
         # -------------------------------------
         # SIMULATION COMPLETED - REPORT RESULTS
         # -------------------------------------
-        print("\nSimulation completed.")
-        print(f"Simulation Time:   {self.simulation_time.total_seconds()} sec")
+        #print("\nSimulation completed.")
+        #print(f"Simulation Time:   {self.simulation_time.total_seconds()} sec")
+        
         # calculate buildup
         buildup_factor = self.E_out_total / (self.Nsim * self.E0 * 2**(-self.num_hvlX))
-        if self.simulation_method in ['forcing', 'combined'] and self.force_first_interaction:
+        if not self.simulate_primaries:
             buildup_factor += 1 # add primaries contribution
-        print(f"Calculated build-up factor: {buildup_factor:.4f}") 
+        #print(f"Calculated build-up factor: {buildup_factor:.4f}") 
         
         # post simulation counting
         self.post_simulation_counting(report=False)
         # simulation info
-        simulation_info = self.simulation_info()
-        return simulation_info
+        return self.simulation_info()
 
 
 
@@ -1465,7 +1328,7 @@ class photon_box_propagation_simulator:
         self.E_out_primaries_theory = self.N_out_primaries_theory * self.E0  # expected energy of primaries out
         self.buildup_factor = self.E_out_total / self.E_out_primaries_theory  # B = E_out_total / E_out_theory
         # add 1 if 1st interacion is forced and we don't simulate primaries
-        if self.simulation_method in ["forcing", "combined"] and self.force_first_interaction:
+        if not self.simulate_primaries:
             self.buildup_factor += 1
 
         if report:
@@ -1538,6 +1401,64 @@ class photon_box_propagation_simulator:
             print(f"  B = E_out/E_out_theory:       {self.buildup_factor:.6f}")
             print("="*70)
 
+    def simulation_info(self):
+        """
+        Comments...
+        """
+        if not hasattr(self, 'Nsim'):
+            raise RuntimeError("Simulation not yet run. Please run simulate() before getting results.")
+
+        return {
+            # most important
+            "method": self.simulation_method,
+            "E0": self.E0,
+            "n_hvl_x": self.num_hvlX,
+            "Srep_index": self.Srep_index,
+            "simulation_time_sec": self.simulation_time.total_seconds(),
+            "N_stps_per_Nsim": self.N_steps / self.Nsim,
+            "buildup_factor": self.buildup_factor,
+
+            
+            # other simulation parameters
+            "n_hvl_y": self.num_hvlY,
+            "n_hvl_z": self.num_hvlZ,
+            "Nsim": self.Nsim,
+            
+            # additional, not used in every method
+            "force_first_interaction": self.force_first_interaction if self.simulation_method in ["forcing", "combined"] else None,
+            "path_extension_factor": self.pef if self.simulation_method in ["pdf", "combined"] else None,
+            "weight_min": self.weight_min if self.simulation_method in ["forcing", "combined", "pdf"] else None,
+            "survival_probability": self.survival_probability if self.simulation_method in ["forcing", "combined", "pdf"] else None,
+
+            
+            # photon fate distribution
+            "N_out_total": self.N_out_total,
+            "E_out_total": self.E_out_total,
+            "N_out_primaries": self.N_out_primaries,
+            "E_out_primaries": self.E_out_primaries,
+            "N_out_secondaries": self.N_out_secondaries,
+            "E_out_secondaries": self.E_out_secondaries,
+            # additionally...
+            "N_backscattered": self.N_backscattered,
+            "E_backscattered": self.E_backscattered,
+            "N_leakage": self.N_leakage,
+            "E_leakage": self.E_leakage,
+            "N_absorbed": self.N_absorbed,
+            "E_absorbed": self.E_absorbed,
+
+            # calculated parameters
+            "N_steps": self.N_steps,
+            "N_stps_per_sec": self.N_steps / self.simulation_time.total_seconds(),
+            "Nsim_per_sec": self.Nsim / self.simulation_time.total_seconds(),
+
+            # other...
+            #
+        }
+
+
+
+##############################
+# Older report method ...
     def report_and_save(self, save_to_file=False, print_report=True):
         """
         Build and optionally print/save formatted simulation results.
@@ -1664,55 +1585,4 @@ class photon_box_propagation_simulator:
             if save_to_file:
                 print(f"Report saved to: {file_path}")
 
-    def simulation_info(self):
-        """
-        Comments...
-        """
-        if not hasattr(self, 'Nsim'):
-            raise RuntimeError("Simulation not yet run. Please run simulate() before getting results.")
-
-        return {
-            # simulation parameters
-            "method": self.simulation_method,
-            "E0": self.E0,
-            "n_hvl_x": self.num_hvlX,
-            "n_hvl_y": self.num_hvlY,
-            "n_hvl_z": self.num_hvlZ,
-            "Nsim": self.Nsim,
-            "Srep_index": self.Srep_index,
-            
-            # additional, not used in every method
-            "force_first_interaction": self.force_first_interaction if self.simulation_method in ["forcing", "combined"] else None,
-            "path_extension_factor": self.pef if self.simulation_method in ["pdf", "combined"] else None,
-            "weight_min": self.weight_min if self.simulation_method in ["forcing", "combined", "pdf"] else None,
-            "survival_probability": self.survival_probability if self.simulation_method in ["forcing", "combined", "pdf"] else None,
-
-            # execution details
-            "simulation_time_sec": self.simulation_time.total_seconds(),
-            "N_steps": self.N_steps,
-            
-            # photon fate distribution
-            "N_out_total": self.N_out_total,
-            "E_out_total": self.E_out_total,
-            "N_out_primaries": self.N_out_primaries,
-            "E_out_primaries": self.E_out_primaries,
-            "N_out_secondaries": self.N_out_secondaries,
-            "E_out_secondaries": self.E_out_secondaries,
-            # additionally...
-            "N_backscattered": self.N_backscattered,
-            "E_backscattered": self.E_backscattered,
-            "N_leakage": self.N_leakage,
-            "E_leakage": self.E_leakage,
-            "N_absorbed": self.N_absorbed,
-            "E_absorbed": self.E_absorbed,
-
-            # calculated parameters
-            "buildup_factor": self.buildup_factor,
-            "N_stps_per_sec": self.N_steps / self.simulation_time.total_seconds(),
-            "N_stps_per_Nsim": self.N_steps / self.Nsim,
-            "Nsim_per_sec": self.Nsim / self.simulation_time.total_seconds(),
-
-            # other...
-            #
-        }
 

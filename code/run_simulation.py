@@ -1,0 +1,112 @@
+#import numpy as np
+import os
+from pathlib import Path
+import pandas as pd
+from datetime import datetime as dt
+
+def save_row(row_dict, filepath):
+    df = pd.DataFrame([row_dict])
+    if not os.path.exists(filepath):
+        df.to_csv(filepath, index=False)
+    else:
+        df.to_csv(filepath, mode="a", header=False, index=False)
+
+#* filename and filepath; "where to save results"
+filename = f"results_{dt.now().strftime('%Y%m%d_%H%M%S')}.csv"
+savefile_path = f"initial_output/simulation_results/{filename}"
+# Stop if file already exists (ommiting overwriting/appending to existing file from previous simulations)
+if Path(savefile_path).exists():
+    print(f"WARNING: File already exists: {savefile_path}")
+    print("Choose a new filename to avoid overwriting/appending.")
+    raise FileExistsError(f"File already exists: {savefile_path}")
+
+
+#import importlib
+from src import PhotonBoxPropagationSimulator as Simulator
+from src import LinearAttenuationCoeff_load as LAC_loader
+# load LAC data
+fp_mac = "../mac_NistXcom/mac_lead.txt"
+lead_density = 11.34 # g/cm^3
+lac_loader = LAC_loader.LACLoader(fp_mac,lead_density,"Svinec")
+
+
+#$ simulation parameters
+#* I) main
+Nsim = 100000
+N_reps = 1
+#E0_list = [0.1,0.5,1.0,2.0,5.0,10.0]
+E0_list = [2]
+#N_hvl_list = [1,2,3,4,6,8]
+N_hvl_list = [4]
+n_hvl_y = 20
+n_hvl_z = 20
+methods = ["buildup", "pdf", "forcing","combined"]
+#methods = ["combined"]
+
+#* II) others
+verbose = False
+path_extension_factor = 3
+force_first_interaction = True
+weight_min = 0.01
+survival_probability = 0.1
+
+
+
+
+#################
+#####  RUN  #####
+#################
+start_time = dt.now()
+total_simulations = len(methods)*len(E0_list)*len(N_hvl_list)*N_reps
+sim_idx = - 1
+print("\n------------- STARTING SIMULATIONS -------------")
+print(f"Total simulations to run: {total_simulations}")
+print(f"Simulation parameters:")
+print(f"\tMethods: {methods}")
+print(f"\tE0 values: {E0_list}")
+print(f"\tN_hvl values: {N_hvl_list}")
+print(f"\tRepetitions: {N_reps}")
+print(f"\tNsim per simulation: {Nsim}")
+print("----------------------------------------------\n")
+for method in methods:
+    for E0 in E0_list:
+        for N_hvl in N_hvl_list:
+            for rep in range(N_reps):
+                sim_idx += 1
+                # simulate for choosen setup and gather results
+                print(f"\n\n")
+                print("="*75)
+                print(f"\t\tMethod: {method}, E0: {E0} MeV, N_hvl: {N_hvl}, Rep: {rep+1}/{N_reps}")
+                time = dt.now() - start_time
+                print(f"\t\t(N_sim_completed={sim_idx}/{total_simulations}; total_time={time.total_seconds()/60:.2f} min)")
+                print("="*75)
+
+                # ---------------------------------
+                # initialize simulator class instance
+                # ---------------------------------
+                simulator = Simulator.photon_box_propagation_simulator((N_hvl, n_hvl_y, n_hvl_z), lac_loader, E0)
+                config = {
+                    "simulation_method": method,
+                    "Nsim": Nsim,
+                    "Srep_index": rep,
+                    "verbose": verbose,
+                    "progress_report_frequency": 10,
+                    "path_extension_factor": path_extension_factor,
+                    "force_first_interaction": force_first_interaction,
+                    "weight_min": weight_min,
+                    "start_weight": 1.0,
+                    "survival_probability": survival_probability
+                }
+
+                result = simulator.run(config)
+                
+                #! Saving single simulation results
+                #* I) normal storing and saving later --> if used, later needs saving: df=pd.DataFrame(results) and df.to_csv(...)
+                #results.append(result)
+                #* II) real time partial results saving --> safer as intermediate results are saved, not lost if simulation breaks
+                save_row(result, savefile_path)
+
+print("\n\n\n------------- SIMULATIONS COMPLETED -------------")
+#note: tole se da izračunat tut v data_analysis!
+total_time = dt.now() - start_time
+print(f"Total simulation time: {total_time.total_seconds()/60:.2f} min")

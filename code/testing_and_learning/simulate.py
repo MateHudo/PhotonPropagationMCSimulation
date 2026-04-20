@@ -1,8 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-#import scienceplots
-#plt.style.use(['science','notebook','grid'])
-from datetime import datetime as dt
 
 #import importlib
 from src import PhotonBoxPropagationSimulator as Simulator
@@ -13,18 +9,18 @@ fp_mac = "../mac_NistXcom/mac_lead.txt"
 lead_density = 11.34 # g/cm^3
 lac_loader = LAC_loader.LACLoader(fp_mac,lead_density,"Svinec")
 print(f"\n----------------------- STARTING SIMULATION -----------------------\n")
-print(f"Loaded LAC data for {lac_loader.material_name} with density {lead_density} g/cm^3.")
+#print(f"Loaded LAC data for {lac_loader.material_name} with density {lead_density} g/cm^3.")
 
 #* define parameters:
 # side lengths - note: photons start in the middle, so they need to travel only half of the box length to reach the edge!
-n_hvl_Y = 10
-n_hvl_Z = 10
+n_hvl_Y = 20
+n_hvl_Z = 20
 # box dimensions in HVL units
-n_hvl_X = 4
+n_hvl_X = 6
 # energy of incident photons
-E0 = 2 # MeV
-simulation_method = ["simulate",  "buildup", "pdf", "forcing", "combined"] [4]            
-Nsim = 10000
+E0 = 1 # MeV
+simulation_method = ["simulate",  "buildup", "pdf", "forcing", "combined"] [3] #! change the index to select the method    
+Nsim = 100000
 verbose = False
 path_extension_factor = 2
 force_first_interaction = True
@@ -59,6 +55,7 @@ for key, value in config.items():
 simulator = Simulator.photon_box_propagation_simulator((n_hvl_X, n_hvl_Y, n_hvl_Z), lac_loader, E0)
 sim_info = simulator.run(config)
 
+print("")
 for key, value in sim_info.items():
     print(f"{key}: {value}")
 
