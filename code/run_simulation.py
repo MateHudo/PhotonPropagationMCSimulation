@@ -13,8 +13,14 @@ def save_row(row_dict, filepath):
 
 #* filename and filepath; "where to save results"
 filename = f"results_{dt.now().strftime('%Y%m%d_%H%M%S')}.csv"
-savefile_path = f"initial_output/simulation_results/{filename}"
-# Stop if file already exists (ommiting overwriting/appending to existing file from previous simulations)
+relative_path_to_file = [
+    "initial_output/simulation_results", # old path
+    "../data/raw",
+    "data", #note: use this one, rename and then move it to /raw folder
+] [2]
+savefile_path = relative_path_to_file + f"/{filename}"
+# Stop if file already exists (omitting overwriting/appending to existing file from previous simulations); not relevant 
+# if we use unique filename with timestamp.
 if Path(savefile_path).exists():
     print(f"WARNING: File already exists: {savefile_path}")
     print("Choose a new filename to avoid overwriting/appending.")
@@ -22,10 +28,11 @@ if Path(savefile_path).exists():
 
 
 #import importlib
-from src import PhotonBoxPropagationSimulator as Simulator
-from src import LinearAttenuationCoeff_load as LAC_loader
+from code.src import PhotonBoxPropagationSimulator as Simulator
+from code.src import LinearAttenuationCoeff_load as LAC_loader
+
 # load LAC data
-fp_mac = "../mac_NistXcom/mac_lead.txt"
+fp_mac = "mac_NistXcom/mac_lead.txt"
 lead_density = 11.34 # g/cm^3
 lac_loader = LAC_loader.LACLoader(fp_mac,lead_density,"Svinec")
 
@@ -33,15 +40,15 @@ lac_loader = LAC_loader.LACLoader(fp_mac,lead_density,"Svinec")
 #$ simulation parameters
 #* I) main
 Nsim = 100000
-N_reps = 1
+N_reps = 5
 #E0_list = [0.1,0.5,1.0,2.0,5.0,10.0]
-E0_list = [2]
+E0_list = [1]
 #N_hvl_list = [1,2,3,4,6,8]
-N_hvl_list = [4]
+N_hvl_list = [6]
 n_hvl_y = 20
 n_hvl_z = 20
-methods = ["buildup", "pdf", "forcing","combined"]
-#methods = ["combined"]
+methods = ["normal", "pdf_man", "forcing","combine"]
+methods = ["combine"]
 
 #* II) others
 verbose = False

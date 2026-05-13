@@ -896,8 +896,8 @@ class photon_box_propagation_simulator:
         for eid in range(self.Nsim):
             #self._log(f"\nSimulating event {eid+1}/{self.Nsim}...")
             # Print progress
-            #if eid in self.eid_progress_set:
-            #    print(f"\tProgress: {eid / self.Nsim * 100:.2f}% ({(dt.now() - self.start_time).total_seconds():.2f} sec)")
+            if eid in self.eid_progress_set:
+                print(f"\tProgress: {eid / self.Nsim * 100:.2f}% ({(dt.now() - self.start_time).total_seconds():.2f} sec)")
 
             #* add initial photon to the list of photons to simulate - [r, u, E] - position, direction, energy
             photons_to_simulate = deque([[self.r_entrance,self.u_entrance,self.E0]]) # reset the list for new eid
@@ -1121,7 +1121,6 @@ class photon_box_propagation_simulator:
 
 
 
-
 #####################################################
 # CONFIGURATION (SETUP)
 #####################################################
@@ -1148,11 +1147,12 @@ class photon_box_propagation_simulator:
 
         #* place for additional attributes definitios
         self.weight_first_interaction = 1 - 2**(-self.num_hvlX)
-        if self.simulation_method == "combined":
+        #$ Tale poimenovanja različna za combined je slabo, stala so me 2 uri zdele brezveznga debugganja! (28.4.)
+        if self.simulation_method in ["combined", "combine", "combined_vrm"]:
             self.weight_first_interaction = 1 - 2**(-self.num_hvlX/self.pef)
         #? kako bi tole bolš naredu? Nekateri parameteri so relavantni le pri nekaterih metodah... (weight_min, pef, ...)
         self.simulate_primaries = True
-        if self.simulation_method in ["forcing", "combined"] and self.force_first_interaction:
+        if self.simulation_method in ["forcing", "combined", "combine", "combined_vrm"] and self.force_first_interaction:
             self.simulate_primaries = False
 
 
@@ -1189,14 +1189,14 @@ class photon_box_propagation_simulator:
         # --------------------------------------------
         # RUN SIMULATION (based on the selected method)
         # --------------------------------------------
-        #note: can use different mathod names for some methods! Suggestion: all methods manes of same length - more elegant results!
+        #note: can use different mathod names for some methods! Suggestion: all methods names of same length - more elegant results!
         if self.simulation_method in ['combined','combine',"combined_vrm"]:
             self.simulate_combinedVRM()
         elif self.simulation_method == 'forcing':
             self.simulate_forcing_interactions()
         elif self.simulation_method in ['pdf', 'pdf_man']:
             self.simulate_pdf_manipulation()
-        elif self.simulation_method == 'buildup':
+        elif self.simulation_method in ['buildup','normal']:
             self.simulate_buildup_calc()
         else:
             raise ValueError(f"Unknown simulation method: {self.simulation_method}")
@@ -1425,10 +1425,10 @@ class photon_box_propagation_simulator:
             "Nsim": self.Nsim,
             
             # additional, not used in every method
-            "force_first_interaction": self.force_first_interaction if self.simulation_method in ["forcing", "combined"] else None,
-            "path_extension_factor": self.pef if self.simulation_method in ["pdf", "combined"] else None,
-            "weight_min": self.weight_min if self.simulation_method in ["forcing", "combined", "pdf"] else None,
-            "survival_probability": self.survival_probability if self.simulation_method in ["forcing", "combined", "pdf"] else None,
+            "force_first_interaction": self.force_first_interaction if self.simulation_method in ["forcing", "combined", "combine", "combined_vrm"] else None,
+            "path_extension_factor": self.pef if self.simulation_method in ["pdf", "pdf_man", "combined", "combine", "combined_vrm"] else None,
+            "weight_min": self.weight_min if self.simulation_method in ["forcing", "combined", "combine", "combined_vrm", "pdf", "pdf_man"] else None,
+            "survival_probability": self.survival_probability if self.simulation_method in ["forcing", "combined", "combine", "combined_vrm", "pdf", "pdf_man"] else None,
 
             
             # photon fate distribution

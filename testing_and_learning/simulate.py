@@ -1,11 +1,16 @@
 import numpy as np
 
+#$ case of sys.path.append instead of from code.src import ...
+#import sys
+#import os
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
 #import importlib
-from src import PhotonBoxPropagationSimulator as Simulator
-from src import LinearAttenuationCoeff_load as LAC_loader
+from code.src import PhotonBoxPropagationSimulator as Simulator
+from code.src import LinearAttenuationCoeff_load as LAC_loader
 
 # lac
-fp_mac = "../mac_NistXcom/mac_lead.txt"
+fp_mac = "mac_NistXcom/mac_lead.txt"
 lead_density = 11.34 # g/cm^3
 lac_loader = LAC_loader.LACLoader(fp_mac,lead_density,"Svinec")
 print(f"\n----------------------- STARTING SIMULATION -----------------------\n")
@@ -19,7 +24,7 @@ n_hvl_Z = 20
 n_hvl_X = 6
 # energy of incident photons
 E0 = 1 # MeV
-simulation_method = ["simulate",  "buildup", "pdf", "forcing", "combined"] [3] #! change the index to select the method    
+simulation_method = ["simulate",  "normal", "pdf", "forcing", "combine"] [2] #! change the index to select the method
 Nsim = 100000
 verbose = False
 path_extension_factor = 2
